@@ -162,6 +162,23 @@
 		</div>
 		<textarea name="" id ="input" placeholder="input please"></textarea>		
 	</div>
+	<ul id="explain">
+		<li>
+			在输入框输入命令，命令的格式如下：
+		</li>
+		<li>
+			GO n*：向当前方向前进n格，n可为空
+		</li>
+		<li>
+			TUN [LEF | BAC | RIG] n* 向n转、顺时针向后转或者向右转，并沿当前方向移动n格，n可以为空
+		</li>
+		<li>
+			TRA [TOP | lef | BOT | RIG] n* :表示向向屏幕上方平移n格 n可以为空
+		</li>
+		<li>
+			MOV [TOP | lef | BOT | RIG] n* :表示方向转向屏幕某侧，并朝该方向平移n格 n可以为空
+		</li>
+	</ul>
 	<script src="order_small_box35.js"></script>
 </body>
 </html>

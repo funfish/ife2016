@@ -238,16 +238,16 @@
 			nLiStep--;
 		}
 		if (text[seq] !== '') {
-			var orderWord = order.match(/[^\d]+/g)[0].replace(/^\s*|\s*$/g, '');
-			
-			nStep = order.match(/\d+/g) || ['0'];
+			nStep = order.match(/\s\d+/g) || ['0'];
 			nStep = parseInt(nStep[0]);
+
+			if (nStep > 0) order = order.match(/[^\d]+/g)[0].replace(/^\s*|\s*$/g, ''); 
 			boxLeft = box.offsetLeft;
 			boxTop = box.offsetTop;
 			then = new Date();
 			preDir = boxDir;
 
-			switch (orderWord) {
+			switch (order) {
 				case 'tun lef':
 					setDir(-1);
 					break;
@@ -261,11 +261,11 @@
 					break;
 
 				case 'mov top':
-					setDir(move(0));
+					setDir(mov(0));
 					break;
 
 				case 'mov rig':
-					setDir(move(90));
+					setDir(mov(90));
 					break;
 
 				case 'mov bot':
@@ -306,6 +306,7 @@
 					textarea.readOnly = false;
 					wrongFlag = true;
 					boxDir = preDir;
+					seq++;
 			}			
 		} else {
 			if (++seq < textLength) {
@@ -329,12 +330,12 @@
 	}
 	//读取输入内容,ie8
 	addEvent('click', button[0], function() {
-		if (wrongFlag) {
-			ol.querySelectorAll('li')[seq - nLiStepAll].style.background = '#D2CBCB';
+		var liCollect =  ol.querySelectorAll('li');
+		for (var i = 0, m = liCollect.length; i < m; i++) {
+			liCollect[i].style.background = '#D2CBCB';
 		}
 		wrongFlag = false;
 		textarea.readOnly = true;
-		text = []; 
 		seq = 0;
 		nLiStepAll = 0;
 		overFlag = false;
@@ -370,7 +371,11 @@
 		addClass(blueLine, 'top');
 		box.style.position = 'absolute';
 		box.style.left = ul2Width + tableWidth / 2 + 'px';
-		box.style.top =  ul1Height + tableHeight / 2 + 'px';		
+		box.style.top =  ul1Height + tableHeight / 2 + 'px';
+		box.style.webkitTransform = 'rotate(0deg)';
+		box.style.mozTransform = 'rotate(0deg)';
+		box.style.msTransform = 'rotate(0deg)';
+		box.style.transform = 'rotate(0deg)';		
 	})
 	addEvent('keydown', textarea, function(e) {
 		var liCollect = ol.querySelectorAll('li');
@@ -389,7 +394,8 @@
 				for (var i = liLength - 1; i >= textLength; i--) {
 					ol.removeChild(liCollect[i])
 				}
-			}			
+			}
+			textLength += nLiStepAll;			
 		}, 0)
 		if (liLength > 9) {
 			ol.style.height = 202 + 20 * (liLength - 9) + 'px';

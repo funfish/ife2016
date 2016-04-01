@@ -40,7 +40,7 @@ input {
 }
 button {
 	display: inline-block;
-	margin: 10px 10px;
+	margin: 10px 20px;
 	height: 100%;
 }
 /**************移动盒子**************************/
@@ -80,7 +80,7 @@ body {
 }
 /**********************textarea***********************/
 #input {
-	
+
 }
 textarea {
 	margin: 0;
@@ -109,7 +109,7 @@ ol {
 	left: 0;
 	top: 0;
 	margin: 0;
-	padding: 2px 0 0 0;
+	padding: 1px 0 0 0;
 	width: 100%;
 	height: 202px;
 	background-color: #D2CBCB;
@@ -118,7 +118,21 @@ ol {
 	float: left;
 	list-style: none;
 	width: 20px;
-	text-align: bo;
+	text-align: center;
 	font-size: 14px;
 	line-height: 20px;	
+}
+
+/******************文字补充部分*************************/
+#explain {
+	position: absolute;
+	left: 500px;
+	top:10px;
+	border: 1px solid red;
+}
+#explain li {
+	list-style: none;
+	font-size: 14px;
+	line-height: 20px;
+	min-width: 400px;
 }
