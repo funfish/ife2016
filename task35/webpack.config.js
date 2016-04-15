@@ -20,7 +20,7 @@ var publicPath = '/build/';
 module.exports = {
     debug: true,
     //入口文件配置
-    entry: ['./src/js/main'],
+    entry: ['./src/main'],
     //文件导出的配置
     //web-dev-server里面的前后端联调，使用url绝对地址
     output:{
@@ -48,7 +48,7 @@ module.exports = {
     },
     babel: {
         presets: ['es2015', 'stage-0'],
-        plugins: ['transform-runtime']
+        plugins: ['transform-runtime', 'transform-es3-member-expression-literals','transform-es3-property-literals']
     },
     resolve:{
         extentions:['','js']//当requrie的模块找不到时，添加这些后缀
