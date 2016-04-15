@@ -1,8 +1,8 @@
 'use strict'
 
-var sys = require('./sys');
-var util = require('./util');
-var box = require('./box');
+var sys = require('./js/sys');
+var util = require('./js/util');
+var box = require('./js/box');
 var box = new box();
 var ol = sys.ol;
 
