@@ -24,6 +24,7 @@ exports.removeClass = removeClass;
 * 获取DOM节点上的样式上的值
 * @param {dom} el 节点 
 * @param {string} key 属性
+* @return 对应key的值
 */
 function getCss(el, key){
     return el.currentStyle ? el.currentStyle[key] : document.defaultView.getComputedStyle(el ,false)[key];
@@ -32,9 +33,9 @@ exports.getCss = getCss;
 
 /**
 * 强行ie8事件绑定
-* param {string} evnt 事件名
-* param {dom} el 节点
-* param {function} func 事件响应后处理的函数
+* @param {string} evnt 事件名
+* @param {dom} el 节点
+* @param {function} func 事件响应后处理的函数
 */
 function addEvent(evnt, el, func) {
    if (el.addEventListener)  // W3C DOM
@@ -50,8 +51,8 @@ exports.addEvent = addEvent;
 
 /**
 * 恶心的滚轮事件
-* param {dom} el 节点
-* param {function} callback 回调函数
+* @param {dom} el 节点
+* @param {function} callback 回调函数
 */
 function wheel (el, callback) {
 	var wheelType = 'mousewheel';

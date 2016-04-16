@@ -3,6 +3,7 @@
 var sys = require('./sys');
 var util = require('./util');
 var abs = Math.abs;
+
 /**
 * @constructor
 */
@@ -22,6 +23,9 @@ function Box() {
 	this.left = this.outRang.lef;
 }
 
+/**
+* 初始化box，创建box
+*/
 Box.prototype.init = function() {
 	var box = this.box;
 	var blueLine = document.createElement('div');
@@ -36,6 +40,9 @@ Box.prototype.init = function() {
 }
 
 /**
+* box移动函数
+* @param {num} step 前进的步数
+* @param {arry} boxDirNeed 前进需要的方向，是四个数的数组
 */
 Box.prototype.boxGo = function(step, boxDirNeed) {
 	if(step instanceof Array) {
@@ -89,9 +96,14 @@ Box.prototype.boxGo = function(step, boxDirNeed) {
 		if (box.offsetLeft < that.outRang.left) {
 			box.style.left = that.ourRang.left + 'px';
 		}	
-	}, 25)
+	}, 10)
 }
 
+/**
+* box 在给定旋转方向时，转化为向左向右的次数
+* @param {num} degree 需要转到的角度
+* @return 向左向右的次数，顺时针为正
+*/
 Box.prototype.dir = function(degree) {
 	var dir = 0;
 	var temp = 0;
@@ -109,6 +121,10 @@ Box.prototype.dir = function(degree) {
 	return dir	
 }
 
+/**
+* box旋转函数
+* @param {num} dir 需要向左向右的次数
+*/
 Box.prototype.boxTune = function(dir) {
 	var box = this.box;
 	var oldDeg = this.deg;
@@ -126,7 +142,6 @@ Box.prototype.boxTune = function(dir) {
 		if (abs(periodTun) < abs(90 * dir)) {
 			tempDeg = oldDeg + periodTun;	
 		} else {
-		console.log(1);
 			tempDeg = end;
 			clearTimeout(interval2);
 		}
@@ -134,10 +149,12 @@ Box.prototype.boxTune = function(dir) {
 		box.style.mozTransform = 'rotate(' + tempDeg + 'deg)';
 		box.style.msTransform = 'rotate(' + tempDeg + 'deg)';
 		box.style.transform = 'rotate(' + tempDeg + 'deg)';		
-	}, 25); 	
+	}, 10); 	
 }
 
-
+/**
+* 获取所有任务，存在tasks数组里面
+*/
 Box.prototype.getTasks = function()  {
 	var text = sys.textarea.value.split(/\n|\r/g);
 	var textLength = text.length;
@@ -149,6 +166,10 @@ Box.prototype.getTasks = function()  {
 	}
 }
 
+/**
+* 解析单个语句，并得出对应的函数处理
+* @return 单个task，包括参数，次数，调用函数
+*/
 Box.prototype.taskParse = function(text) {
 	var parse = text.match(/^((mov|tra|tun|go)(\s(lef|rig|top|bot|bac))*)(\s\d)*$/);
 	var task = {
@@ -227,6 +248,9 @@ Box.prototype.taskParse = function(text) {
 	return task
 }
 
+/**
+* 任务执行时候，右边的序列条对应动作
+*/
 Box.prototype.programScroll = function() {
 	var liCollect = sys.ol.querySelectorAll('li');
 	liCollect[this.seq].style.background = 'green';
@@ -238,6 +262,9 @@ Box.prototype.programScroll = function() {
 	}	
 }
 
+/**
+* 执行输入的任务
+*/
 Box.prototype.run = function() {
 	var length = this.tasks.length;
 	var eachTask = this.tasks.shift();

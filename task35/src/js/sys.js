@@ -13,7 +13,7 @@ var sys = {
 	tableHeight: 403,
 	tableWidth: 403,
 	ul1Height:  40,
-	ul2Width: 40,
+	ul2Width: 40
 }
 
 module.exports = sys;

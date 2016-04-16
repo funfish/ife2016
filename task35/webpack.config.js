@@ -48,7 +48,7 @@ module.exports = {
     },
     babel: {
         presets: ['es2015', 'stage-0'],
-        plugins: ['transform-runtime', 'transform-es3-member-expression-literals','transform-es3-property-literals']
+        plugins: ['transform-runtime']
     },
     resolve:{
         extentions:['','js']//当requrie的模块找不到时，添加这些后缀

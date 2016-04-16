@@ -8,6 +8,7 @@ var ol = sys.ol;
 
 box.init();
 
+//监听运行命令
 util.addEvent('click', sys.button[0], function(e) {
 	var liCollect = ol.querySelectorAll('li');
 	for (var i = 0, m = liCollect.length; i < m; i++) {
@@ -18,6 +19,8 @@ util.addEvent('click', sys.button[0], function(e) {
 	box.getTasks();
 	box.run();
 });
+
+//监听键盘输入，处理问题
 util.addEvent('keydown', sys.textarea, function(e) {
 	var liCollect = ol.querySelectorAll('li');
 	var liLength = liCollect.length;
@@ -34,15 +37,19 @@ util.addEvent('keydown', sys.textarea, function(e) {
 			}
 		} else if (liLength > textLength) {
 			for (var i = liLength - 1; i >= textLength; i--) {
-				ol.removeChild(liCollect[i])
+				ol.removeChild(liCollect[i]);
 			}
 		}
 		liLength = ol.querySelectorAll('li').length;
 		if (liLength > 9) {
 			ol.style.height = 202 + 20 * (liLength - 9) + 'px';
+		} else {
+			ol.style.height = 202 + 'px';
 		}
 	}, 0)
 });
+
+//监听重置问题
 util.addEvent('click', sys.button[1], function() {	
 	var li = document.createElement('li');
 	li.innerHTML = 1;
@@ -64,6 +71,8 @@ util.addEvent('click', sys.button[1], function() {
 	box.top = box.outRang.top;
 	box.left = box.outRang.lef;
 })
+
+//监听输入区Textarea的滑轮滚动
 util.wheel(sys.textarea, function(delta){
 	if (delta > 0) {
 		if (ol.offsetTop < -120) {
@@ -80,6 +89,8 @@ util.wheel(sys.textarea, function(delta){
 		}				
 	}
 });
+
+//监听输入区Textarea的滑轮滑动
 util.addEvent('scroll', sys.textarea, function(e) {
 	ol.style.top = -sys.textarea.scrollTop + 'px';
 });
