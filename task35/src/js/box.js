@@ -220,27 +220,27 @@ Box.prototype.taskParse = function(text) {
 			break;	
 
 		case 'mov top':
-			task.callback = [this.boxTune, this.boxGo];
+			task.callback = [this.boxTune, this.boxGo, this.dir];
 			task.times = 2;
-			task.param = [this.dir(0), parse[5]];
+			task.param = [0, parse[5]];
 			break;
 
 		case 'mov rig':
-			task.callback = [this.boxTune, this.boxGo];
+			task.callback = [this.boxTune, this.boxGo, this.dir];
 			task.times = 2;
-			task.param = [this.dir(90), parse[5]];
+			task.param = [90, parse[5]];
 			break;	
 
 		case 'mov bot':
-			task.callback = [this.boxTune, this.boxGo];
+			task.callback = [this.boxTune, this.boxGo, this.dir];
 			task.times = 2;
-			task.param = [this.dir(180), parse[5]];
+			task.param = [180, parse[5]];
 			break;
 
 		case 'mov lef':
-			task.callback = [this.boxTune, this.boxGo];
+			task.callback = [this.boxTune, this.boxGo, this.dir];
 			task.times = 2;
-			task.param = [this.dir(-90), parse[5]];
+			task.param = [-90, parse[5]];
 			break;	
 
 		default: task = false;
@@ -277,7 +277,8 @@ Box.prototype.run = function() {
 		eachTask.callback.call(this, eachTask.param);
 	};
 	if (eachTask.times === 2) {
-		eachTask.callback[0].call(this, eachTask.param[0]);
+		var dir = eachTask.callback[2].call(this, eachTask.param[0])
+		eachTask.callback[0].call(this, dir);
 		setTimeout(eachTask.callback[1].bind(that, eachTask.param[1]), 500);
 	};
 	if (this.tasks.length > 0) {
