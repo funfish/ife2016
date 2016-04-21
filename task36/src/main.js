@@ -7,11 +7,12 @@ var Table = require('./js/Table');
 var Path = require('./js/Path');
 var Img = require('./js/image');
 var table = new Table(10, 10);
+var path = new Path(table);
 var box = new box();
 var img = new Img();
 var ol = sys.ol;
 
-box.init(table);
+box.init(table, path);
 
 //监听运行命令
 util.addEvent('click', sys.button[0], function(e) {
@@ -112,10 +113,10 @@ util.addEvent('click', sys.button[2], function(){
 	while (targetNode.isWall) {
 		targetNode =  table.target();
 	};
-	var path = new Path(table);
 	var text;
 
 	box.seq = 1;
+	path.build = true;
 	text = path.find(startNode, targetNode, (box.deg % 360) / 90);
 	sys.textarea.readOnly = true;
 	sys.button[0].disabled = true;
@@ -130,11 +131,11 @@ util.addEvent('click', sys.button[3], function(){
 	var text;
 
 	text = box.imageGo(img.data);
-	console.log(text);
 	sys.textarea.readOnly = true;
 	sys.button[0].disabled = true;
 	sys.button[1].disabled = true;
 	sys.button[2].disabled = true;
+
 	box.getTasks(text);
 	box.run(false);	
 })

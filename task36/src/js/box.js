@@ -14,6 +14,7 @@ function Box() {
 	this.tasks = [];
 	this.seq = 0;
 	this.table = [];
+	this.path = '';
 	this.outRang = {
 		top: sys.ul1Height + 1,
 		bottom: sys.tableHeight + sys.ul1Height - 41,
@@ -28,10 +29,11 @@ function Box() {
 /**
 * 初始化box，创建box
 */
-Box.prototype.init = function(table) {
+Box.prototype.init = function(table,path) {
 	var box = this.box;
 	var blueLine = document.createElement('div');
 
+	this.path = path;
 	this.table = table;
 	box.appendChild(blueLine);
 	document.body.appendChild(box);
@@ -61,18 +63,24 @@ Box.prototype.boxGo = function(step, boxDirNeed) {
 	var currentTop = this.top;
 	var currentLeft = this.left;
 	var that = this;
-	var tdX = Math.floor(this.left / 40) - 1;
-	var tdY = Math.floor(this.top / 40) - 1;
+	var tdX = [];
+	var tdY = [];
 
-	tdY += boxDirNeed[2] - boxDirNeed[0];
-	tdX += boxDirNeed[1] - boxDirNeed[3];
 
-	console.log([tdY, tdX])
-	if (tdY > 9 || tdY < 0 || tdX > 9 || tdX < 0 || this.table.nodes[tdY][tdX].isWall) {
-		this.wrongFlag = true;
-		console.log('go wrong')
+	for (var i = 0; i < step; i++) {
+		if (i === 0) {
+			tdY[0] = Math.floor(this.top / 40) - 1 + boxDirNeed[2] - boxDirNeed[0];			
+			tdX[0] = Math.floor(this.left / 40) - 1 + boxDirNeed[1] - boxDirNeed[3];
+		} else {
+			tdY[i] = tdY[i- 1] + boxDirNeed[2] - boxDirNeed[0];
+			tdX[i] = tdX[i- 1] + boxDirNeed[1] - boxDirNeed[3];			
+		}
+		if(tdY[i] > 9 || tdY[i] < 0 || tdX[i] > 9 || tdX[i] < 0 || this.table.nodes[tdY[i]][tdX[i]].isWall) {
+			this.wrongFlag = true;
+			console.log('go wrong');
+			break;
+		}
 	}
-
 /*	if (this.top > that.outRang.bottom) {
 		this.top = that.outRang.bottom;
 	}
@@ -176,8 +184,16 @@ Box.prototype.getTasks = function(text)  {
 	for (var i = 0; i < textLength; i++) {
 		text[i] = text[i].replace(/^\s*|\s*$/g, '');
 		text[i] = text[i].toLowerCase();
+		this.tasks.push(text[i]);
+	}	
+/*
+	console.log(text);
+	for (var i = 0; i < textLength; i++) {
+		text[i] = text[i].replace(/^\s*|\s*$/g, '');
+		text[i] = text[i].toLowerCase();
 		this.tasks.push(this.taskParse(text[i]));
 	}
+*/
 }
 
 /**
@@ -268,6 +284,13 @@ Box.prototype.taskParse = function(text) {
 			};
 		}
 	}	
+	if (task === false) {
+		parse = text.match(/^(mov\sto)\s+(\d),(\d)$/);
+		if (parse[1] === 'mov to') {
+			task = this.movTo(parse[2], parse[3]);
+		}
+	}
+
 	return task
 }
 
@@ -315,17 +338,44 @@ Box.prototype.build = function(color) {
 			}, 50)				
 		} else {
 			this.wrongFlag = true;
-			console.log('必须先建墙')
+			console.log('必须先建墙');
 		}
 	}
 }
+
+Box.prototype.movTo = function(targetX ,targetY) {
+	var path = this.path;
+	targetX = Math.floor(targetX);
+	targetY = Math.floor(targetY);
+
+	console.log([this.left, this.top], [targetX ,targetY]);
+	var text = path.find(this.table.nodes[Math.floor(this.top / 40) - 1][Math.floor(this.left / 40) - 1],
+	 	this.table.nodes[targetY][targetX], (this.deg % 360) / 90);
+	console.log(typeof text,text.length);
+	var task = [];
+	var length = text.length ;
+
+	if (text.length === 0) {
+		task = false;
+	} else {
+		for (var i = 0; i < length; i++) {
+			task.push(this.taskParse(text[i]));
+		}
+	}
+
+	return task
+}
+
 
 Box.prototype.pathError = function() {
 	var liCollect = sys.ol.querySelectorAll('li');
 	if (this.seq > 1) {
 		liCollect[this.seq - 2].style.background = '#D2CBCB';
+		if (this.seq < liCollect.length) {
+			liCollect[this.seq].style.background = '#D2CBCB';			
+		}
 	}
-	if (this.seq > 1) {
+	if (this.seq >= 1) {
 		liCollect[this.seq - 1].style.background = 'red';		
 	}
 	this.tasks = [];
@@ -360,69 +410,105 @@ Box.prototype.programScroll = function() {
 */
 Box.prototype.run = function(scroll) {
 	var length = this.tasks.length;
-	var eachTask = this.tasks.shift();
+	var eachTask = this.taskParse(this.tasks.shift());
 	var time = 500 * eachTask.times;
 	var that = this;
+	var time = 0;
+	var timeCell = 0;
 
+	if (eachTask instanceof Array) {
+		for (var i = 0, m = eachTask.length; i < m; i++) {
+			time += 500 * eachTask[i].times;
+		}
+	}else {
+		time = 500 * eachTask.times;
+	}
 	if (scroll) {
 		this.programScroll();
-		this.seq++;
+		console.log(this.wrongFlag);
+		console.log(this.seq)
 	};
-
-	if (eachTask === false) {
-		this.wrongFlag = true;
-	}
 	if (this.wrongFlag) {
+		console.log('11')
 		this.pathError();
 	}else {
-		if (eachTask.times <= 1) {	
-			eachTask.callback.call(this, eachTask.param);
-		};
-		if (eachTask.times === 2) {
-			var dir = eachTask.callback[2].call(this, eachTask.param[0]);
-			if (dir === 0 || eachTask.param[1] === 0) {
-				time = 500;
-			}
-			if (dir === 0 && eachTask.param[1] === 0) {
-				time = 0;
-			}
-			if (dir !== 0) {
-				eachTask.callback[0].call(this, dir);
-			}	
-			if (eachTask.param[1]) {
-				setTimeout(eachTask.callback[1].bind(that, eachTask.param[1]), 500);			
-			}
-		};
+		for (var i = 0, m = eachTask.length || 1; i < m; i++) {
+				var eachCell = eachTask[i] || eachTask;
+
+				if (eachCell === false) {
+					setTimeout(function(){
+						console.log(111111111);
+						that.wrongFlag = true;
+					}, timeCell);
+				}
+				if (eachCell.times <= 1) {	
+					(function(eachOne) {
+						setTimeout(eachOne.callback.bind(that, eachOne.param), timeCell)	
+					})(eachCell)
+									
+				};
+				if (eachCell.times === 2) {
+					(function(eachOne) {
+						setTimeout(function() {
+							var dir = eachOne.callback[2].call(that, eachOne.param[0]);
+
+							if (dir === 0 && eachOne.param[1] === 0) {
+								time -= 1000;
+							}else if (dir === 0 || eachOne.param[1] === 0) {
+								time -= 500;
+							}
+							if (dir !== 0) {
+								eachOne.callback[0].call(that, dir)
+							}	
+							if (eachOne.param[1]) {
+								setTimeout(eachOne.callback[1].bind(that, eachOne.param[1]), 500);			
+							}						
+						}, timeCell);						
+					})(eachCell)
+				};
+				timeCell += eachCell.times * 500;
+		}
 		if (this.tasks.length > 0) {
-			if (this.wrongFlag === true) {
-				this.pathError()
-			} else if (typeof eachTask === 'object') {
-				setTimeout(that.run.bind(that, scroll), time);	
+			if (typeof eachTask === 'object' || eachTask === false) {
+				setTimeout(function() {
+					if (that.wrongFlag === true) {
+						console.log('114',that.seq);
+						that.pathError();
+					} else {
+						that.run.call(that, scroll)
+					}
+				}, time);	
 			} else {
 				this.seq = 0;
 				sys.textarea.readOnly = false;
 				sys.button[0].disabled = false;	
 				sys.button[1].disabled = false;
-				sys.button[2].disabled = false;		
+				sys.button[2].disabled = false;	
+				this.build =	false;
 			}
 		} else {
 			if (this.wrongFlag === true) {
+				console.log("112");
 				this.pathError()
 			}else {
 				setTimeout(function() {
 					if (that.wrongFlag === true) {
-						that.pathError()
+						that.pathError();
+						console.log('113');
 					}
 					that.seq = 0;
 					sys.textarea.readOnly = false;
 					sys.button[0].disabled = false;
 					sys.button[1].disabled = false;		
 					sys.button[2].disabled = false;	
+					this.build =	false;
 				}, time)			
 			}
 		}		
 	}
-
+	if (scroll) {
+		this.seq++;
+	};
 }
 
 Box.prototype.imageGo = function(data) {

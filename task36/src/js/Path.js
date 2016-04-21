@@ -4,6 +4,7 @@ function Path(table){
 	this.table = table;
 	this.startNode = '';
 	this.targetNode = '';
+	this.build = false;
 };
 
 Path.prototype.find = function(startNode, targetNode, startDir) {
@@ -12,14 +13,20 @@ Path.prototype.find = function(startNode, targetNode, startDir) {
 	var openList = [],
 		closeList = [],
 		successFlag = false,
+		endFlag = false,
 		neighbors,
 		text;
 
 	startNode.h = manhattan(startNode, targetNode);
 	startNode.f = startNode.g + startNode.g;
 	openList.push(startNode);
+	if (targetNode.isWall) {
+		console.log('不可墙上');
+		endFlag = true;
+		text = [];
+	}
 
-	while(!successFlag) {
+	while(!endFlag) {
 		var node = openList.shift();
 
 		node.close = true;
@@ -40,26 +47,34 @@ Path.prototype.find = function(startNode, targetNode, startDir) {
 		}
 		openList.sort(function(a, b) {
 			return a.f - b.f
-		})
-
-		if(openList === [] || openList[0].h < 0.2) {
+		});
+		console.log(openList[0]);
+		if (openList === []) {
+			endFlag = true;
+		}else if(openList[0].h < 0.2) {
+			endFlag = true;
 			successFlag = true;
 			console.log('success');
 			if (openList) {
 				text = this.getText(this.success(openList[0]), startDir);
+				console.log(text);
 			} else {
 				text = [];
 			}
-			var list = closeList.concat(openList);
-			for (var i = 0, m = list.length; i < m; i++) {
-				list[i].g = 0;
-				list[i].h = 0;
-				list[i].f = 0;
-				list[i].isWall = false;
-				list[i].close = false;
-				list[i].open = false;
-			}
 		}
+	}
+	if (successFlag === true) {
+		var list = openList.concat(closeList);
+		for (var i = 0, m = list.length; i < m; i++) {
+			list[i].g = 0;
+			list[i].h = 0;
+			list[i].f = 0;
+			list[i].isWall = false;
+			list[i].close = false;
+			list[i].open = false;
+		}
+	}else {
+		text = text || [];
 	}
 
 	return text
@@ -100,7 +115,7 @@ Path.prototype.getText = function(steps, startDir) {
 	var getText = [];
 	var nextDir = startDir;
 	var preX = this.startNode.x;
-	var preY = this.startNode.y
+	var preY = this.startNode.y;
 
 	for (var  i = 1, m = steps.length; i < m; i++) {
 		var dy = preY - steps[i][1];
@@ -138,8 +153,10 @@ Path.prototype.getText = function(steps, startDir) {
 		preY = steps[i][1];
 	}
 
-	getText.pop();//到目的地的上一点，方向面对目的地
-	getText.push('build')
+	if(this.build){
+		getText.pop();//到目的地的上一点，方向面对目的地
+		getText.push('build');
+	}
 
 	return getText
 }
