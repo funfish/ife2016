@@ -1,5 +1,12 @@
+'use strict'
+
 var manhattan = require('./util').manhattan;
 
+/**
+* 路径对象
+* constructor
+* @param {array} table 表格对象
+*/
 function Path(table){
 	this.table = table;
 	this.startNode = '';
@@ -7,9 +14,17 @@ function Path(table){
 	this.build = false;
 };
 
+/**
+* 寻找起始位置到终点位置的路径为 Astar方法！
+* @param {object} startNode 起始节点
+* @param {object} targetNode 结束节点
+* @param {num} startDir 起始box的方向
+* @return text 返回找到路径分析到的移动命令
+*/
 Path.prototype.find = function(startNode, targetNode, startDir) {
 	this.startNode = startNode;
 	this.targetNode = targetNode;
+
 	var openList = [],
 		closeList = [],
 		successFlag = false,
@@ -20,12 +35,15 @@ Path.prototype.find = function(startNode, targetNode, startDir) {
 	startNode.h = manhattan(startNode, targetNode);
 	startNode.f = startNode.g + startNode.g;
 	openList.push(startNode);
-	if (targetNode.isWall) {
-		console.log('不可墙上');
+
+	//处理目的地问题
+	if (targetNode.isWall || startNode === targetNode) {
+		console.log('不可墙上或起始点不可以和终点一致');
 		endFlag = true;
 		text = [];
 	}
 
+	//不断寻址，直到寻的目的地路径
 	while(!endFlag) {
 		var node = openList.shift();
 
@@ -33,6 +51,8 @@ Path.prototype.find = function(startNode, targetNode, startDir) {
 		node.open = false;
 		closeList.push(node);
 		neighbors = this.findneighbor(node);
+
+		//查询上下左右临近的节点，若非墙非closeList更新g,h,f，加入openList
 		for (var i = 0, m = neighbors.length; i < m; i++) {
 			var neighbor = neighbors[i];
 			if (neighbor.close || neighbor.isWall) continue;
@@ -45,22 +65,22 @@ Path.prototype.find = function(startNode, targetNode, startDir) {
 				openList.push(neighbor);
 			}
 		}
+
+		//对f值由小到大的排序
 		openList.sort(function(a, b) {
 			return a.f - b.f
 		});
-		console.log(openList[0]);
+
+		//若目标节点无法到达，openList为空
 		if (openList === []) {
 			endFlag = true;
 		}else if(openList[0].h < 0.2) {
 			endFlag = true;
 			successFlag = true;
-			console.log('success');
-			if (openList) {
-				text = this.getText(this.success(openList[0]), startDir);
-				console.log(text);
-			} else {
-				text = [];
-			}
+			console.log('find Path success');
+			
+			//通过获取路径上的每个节点以及对其处理获得任务函数
+			text = this.getText(this.success(openList[0]), startDir);
 		}
 	}
 	if (successFlag === true) {
@@ -79,7 +99,12 @@ Path.prototype.find = function(startNode, targetNode, startDir) {
 
 	return text
 }
-//边早边发现邻居
+
+/**
+* 寻找me节点附近的节点
+* @param {object} me 寻找节点
+* @return neighbors 临近的可用节点
+*/
 Path.prototype.findneighbor = function(me) {
 	var neighbors = [];
 	var num = 0;
@@ -100,6 +125,12 @@ Path.prototype.findneighbor = function(me) {
 
 	return neighbors	
 }
+
+/**
+* 获得寻得路径上的每个节点
+* @param {object} targetNode 目标节点
+* @return steps 返回每个节点
+*/
 Path.prototype.success = function (targetNode) {
 	var steps = [];
 	var temp;
@@ -111,6 +142,13 @@ Path.prototype.success = function (targetNode) {
 	}
 	return steps	
 }
+
+/**
+* 通过获得节点，起始方向，来得到对应的移动指令
+* @param {num} steps 移动的而每个节点
+* @param {num} startDir 移动的起始方向
+* @return getText 返回寻得路径的移动命令
+*/
 Path.prototype.getText = function(steps, startDir) {
 	var getText = [];
 	var nextDir = startDir;
@@ -149,10 +187,13 @@ Path.prototype.getText = function(steps, startDir) {
 			}
 			getText.push('go');
 		}
+
+		//更新preX，preY
 		preX = steps[i][0];
 		preY = steps[i][1];
 	}
 
+	//建墙阶段，去掉尾部go指令，增加，建墙指令
 	if(this.build){
 		getText.pop();//到目的地的上一点，方向面对目的地
 		getText.push('build');
@@ -160,16 +201,5 @@ Path.prototype.getText = function(steps, startDir) {
 
 	return getText
 }
-Path.prototype.bulidPath = function(targetNode) {
-	var neighbors = this.findneighbor(targetNode);
 
-	for (var i = 0, m = neighbors.length; i < m; i++) {
-		var neighbor = neighbors[i];
-		if (neighbor.close || neighbor.isWall) continue;
-		if (!neighbor.open) {
-
-
-		}
-	}
-}
 module.exports = Path;
