@@ -1,0 +1,155 @@
+@media screen and (min-width:960px) {
+	#containerMain {
+		width: 960px;
+	}
+}
+
+@media screen and (max-width:959px) {
+	#containerMain {
+		width: 100%;
+		min-width: 500px;
+	}
+}
+
+@media screen and (min-width:625px) {
+	#containerMain .listQNs{
+		margin: 60px auto;
+		width: 80%;
+	}
+}
+
+@media screen and (max-width:624px) {
+	#containerMain .listQNs{
+		margin: 60px auto;
+		width: 500px;
+	}
+}
+
+ul, li, span, button {
+	margin: 0;
+	padding: 0;
+}
+
+ul, li {
+	list-style: none;
+}
+
+.clearfix:after {
+	content:".";
+	display: block;
+	height: 0;
+	visibility: hidden;
+	clear: both;
+}
+
+.clearfix {
+	*zoom:1;
+}
+
+#containerMain {
+	margin: 0 auto;
+}
+
+.header {
+	background-color: #f80;
+	line-height: 2em;
+	color: white;
+}
+
+.header span:first-child {
+	margin: 0.3em 5%;
+	line-height: 1.4em;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+.header span:last-child {
+	margin-bottom: 0.3em; 
+	line-height: 2.7em;
+	text-align: bottom;
+	font-size: 1em;
+}
+
+#containerListQNs {
+	float: left;
+	width: 100%;
+    background-color: rgba(253, 136, 99, 0.31);
+    font-size: 12px;
+}
+
+.listQNs {
+	background-color: white;
+}
+
+.listQNs li {
+	position: relative;
+	line-height: 3em;
+	text-align: left;
+}
+
+.listQNs li:first-child {
+	background-color: rgba(253, 136, 99, 0.31);
+}
+
+.limiddleQNsList {
+	margin: 0 1%;
+	border-bottom: 1px solid #eee;
+}
+
+.limiddleQNsList:first-child {
+	border-bottom: none;
+}
+
+.limiddleQNsList .titleQNsList,
+.limiddleQNsList .timeQNsList,
+.limiddleQNsList .stateQNsList,
+.limiddleQNsList .actionQNsList {
+	float: left;
+}
+
+.listQNs li .titleQNsList {
+	margin-left: 5%;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.listQNs li .timeQNsList {
+	width: 125px;
+}
+
+.listQNs li .actionQNsList {
+	margin: auto 1% auto 0;
+	width: 189px;
+}
+.listQNs li:first-child .actionQNsList span{
+	margin-left: 5px;
+}
+button {
+	cursor: pointer;
+}
+.listQNs li button {
+	margin-left: 5px; 
+	border: 1px solid #cbb;
+	border-radius: 3px;
+	width: 58px;
+	background-color: white;
+}
+
+.listQNs li:first-child button {
+	float: right;
+	margin: 3px 0;
+	border-color: #eee;
+	padding: 4px 5px;
+	width: 74px;
+	line-height: 1.5em;
+	background-color: #f80;
+	color: white;
+}
+
+.listQNs li input[type="radio"] {
+	position: absolute;
+	left: 10px;
+	top: 9px;
+	float: left;
+}
