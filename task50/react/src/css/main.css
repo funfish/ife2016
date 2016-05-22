@@ -24,8 +24,10 @@
 		width: 500px;
 	}
 }
-
-ul, li, span, button {
+#root {
+	position: relative;
+}
+html, body, ul, li, span, button {
 	margin: 0;
 	padding: 0;
 }
@@ -127,8 +129,6 @@ ul, li {
 }
 button {
 	cursor: pointer;
-}
-.listQNs li button {
 	margin-left: 5px; 
 	border: 1px solid #cbb;
 	border-radius: 3px;
@@ -152,4 +152,45 @@ button {
 	left: 10px;
 	top: 9px;
 	float: left;
+}
+
+/*****************弹出窗口样式*************************/
+#grayCover  {
+	position: absolute;
+	background-color: rgba(153, 136, 136, 0.73);
+	z-index: 99;
+	width: 100%;
+	height: 100%;
+}
+#alert {
+	position: absolute;
+	left: 50%;
+	top: 25%;
+	z-index: 9999;
+	margin-left: -125px; 
+	width: 250px;
+	height: 9em;
+	background-color: white;
+	font-size: 12px;
+}
+#alertHeade {
+	padding: 0.75em;
+	font-size: 1em;
+	background-color: #e80;
+}
+#alertHeade span {
+	float: right;
+	cursor: pointer;
+}
+#alertHeade span:hover {
+	color: white;
+}
+#alert ul {
+	margin: 1em;
+}
+#alert ul li {
+	line-height: 2em;
+}
+#alertButtons {
+	margin: 10px 60px;
 }
