@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Button from '../component/Button'
-//import { Link } from 'react-router'
+import { Link } from 'react-router'
 
 let ListQNsItem = React.createClass({
 	getInitialState() {
@@ -33,7 +33,7 @@ let ListQNsItem = React.createClass({
 					<div style={stateWidth} className="stateQNsList">{QN.substate}</div>
 					<div className="actionQNsList clearfix">
 						<Button  onAcClick={this.deleteQN.bind(this, QN.id)} value="删除" />
-						<Button value="编辑" />
+						<Link to={`/edit/${QN.id}`}><Button value="编辑" /></Link>
 						<Button onClick={this.onClickHandle} value="查看问卷" />
 					</div>
 				</div>

@@ -1,4 +1,4 @@
-import { Add_New_QN, DELETE_QN, SELEDCT_QN, SELEDCT_QN_ALL, DELETE_QN_SOME} from '../constants/ActionTypes'
+import { Add_New_QN, DELETE_QN, SELEDCT_QN, SELEDCT_QN_ALL, DELETE_QN_SOME, TITLE_QN} from '../constants/ActionTypes'
 
 const initialQNState = [
 	{
@@ -31,7 +31,12 @@ export default function listQN(state = initialQNState, action) {
 	
 		case DELETE_QN_SOME:
 			return state.filter(QN => QN.selected === true)
-			
+		
+		case TITLE_QN:
+			return state.map((QN) => QN.ID === action.id ? 
+				Object.assign({}, QN, { title: action.title }) : 
+				QN 
+			)
 	    default:
       		return state
 	}
