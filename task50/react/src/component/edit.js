@@ -4,29 +4,42 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as Actions from '../actions'
 import Button from './Button'
+import Q from './Q'
 
 class Edit extends Component {
-	changeTitleQN () {
-		this.props.actions.setTitleQN(ReactDOM.findDOMNode(this.refs.QNtitle).value)
+    constructor(props) {
+      super(props);
+      this.state = {addChoose: false}
+    }	
+    componentWillUnmount() {
+    	this.setState({
+    		addChoose: false
+    	})
+    }
+	changeTitlenQN(id) {
+		this.props.actions.setTitlenQN(id, ReactDOM.findDOMNode(this.refs.titleQN).value)
 	}
 	render() {
 		let { QNs, actions } = this.props;
-		let QN = QNs.filter((QN) => QN.id === this.props.params.id)[0];	
+		let { addChoose } = this.state;
+		let QN = QNs.filter(QN => QN.id === this.props.params.id)[0];	
+		console.log(QN)
 
 		return (
-			<div className="listQNs">
-				<b><input type="text"  ref="titleQN" className="titleQN" defaultValue={`${QN.title}`} onBlur={this.changeTitleQN.bind(this)} /></b>
+			<div className="editQN">
+				<b><input type="text"  ref="titleQN" className="titleQN editInput" defaultValue={`${QN.titlen}`} onBlur={this.changeTitlenQN.bind(this, QN.id)} /></b>
 				<div className="middleQN">
-
+					{QN.contentQs.map((item ,i) => <Q key={i} q={item} sequence={i+1} id={QN.id} actions={actions} />)}
 					<div className="middleQNFooter">
-						<div className="addChoose">
-							<div>
-								<span className="addBtn"><img src='../src/img/QN单选.png' />单选</span>
-								<span className="addBtn"><img src='../src/img/QN多选.png' />单选</span>
-								<span className="addBtn"><img src='../src/img/QN文本.png' />单选</span>
+						{addChoose && <div className="addChoose">
+							<div className="positionBtn">
+								<div className="addBtn" onClick={() => actions.addNewQ(QN.id, 0)}><img src='../src/img/QN单选.png' />单选</div>
+								<div className="addBtn" onClick={() => actions.addNewQ(QN.id, 1)}><img src='../src/img/QN多选.png' />多选</div>
+								<div className="addBtn" onClick={() => actions.addNewQ(QN.id, 2)}><img src='../src/img/QN文本.png' />文本题</div>
 							</div>
 						</div>
-						<div className="addItem">
+						}
+						<div className="addItem" onClick={() => this.setState({addChoose: true})}>
 							<span>
 							<img src='../src/img/QN加号.png' /> 添加问题
 							</span>

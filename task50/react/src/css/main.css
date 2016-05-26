@@ -12,14 +12,16 @@
 }
 
 @media screen and (min-width:625px) {
-	#containerMain .listQNs{
+	#containerMain .listQNs, 
+	#containerMain  .editQN {
 		margin: 60px auto;
 		width: 80%;
 	}
 }
 
 @media screen and (max-width:624px) {
-	#containerMain .listQNs{
+	#containerMain .listQNs,
+	#containerMain  .editQN {
 		margin: 60px auto;
 		width: 500px;
 	}
@@ -27,7 +29,8 @@
 #root {
 	position: relative;
 }
-html, body, ul, li, span, button, img {
+html, body, ul, li, span, button, img, 
+textarea {
 	margin: 0;
 	padding: 0;
 }
@@ -79,7 +82,7 @@ ul, li {
     font-size: 12px;
 }
 
-.listQNs ,
+.listQNs , .editQN,
 .middleQN .middleQNFooter .addChoose{
 	background-color: white;
 }
@@ -203,54 +206,48 @@ button {
 .middleQN {
     margin: 0 3%;	
 }
-.listQNs .titleQN {
+.editQN .editInput {
     border: none;
-    border-bottom: 1px solid rgba(193, 154, 154, 0.73);
     outline: none;
+}
+.editQN .titleQN {
+    border-bottom: 1px solid rgba(193, 154, 154, 0.73);
     padding: 30px 0;
     width: 94%;
     text-align: center;
 }
-
-.listQNs .footerQN {
+.editQN .footerQN {
 	border-top: 1px solid rgba(193, 154, 154, 0.73);
 	padding: 20px 0 20px 5%;
 }
 
-.listQNs .footerQN input{
+.editQN .footerQN input{
 	margin: 0 25% 10px 3px;
 	width: 150px;
 }
-.listQNs .footerQN button{
+.editQN .footerQN button{
 	float: right;
 	padding: 0 8px;
 	width: 74px;
 }
 
-.listQNs .footerQN button:last-child {
+.editQN .footerQN button:last-child {
 	margin-left: 12px;
 }
 .middleQN .middleQNFooter {
 	border: 1px solid #eee;		
 }
 .middleQN .middleQNFooter {
-	margin: 10px auto 10px auto;
+	margin: 10px 3%;	
 }
 .middleQN .middleQNFooter .addItem {
 	position: relative;
-	margin: auto;
-	width: 99%;
 	height: 80px;
-	background-color: #eee;
 }
 .middleQN .middleQNFooter .addBtn,
 .middleQN .middleQNFooter .addItem {
 	background-color: #eee;
 	cursor: pointer;
-}
-
-.middleQN .middleQNFooter:last-child {
-	border: none;
 }
 
 .middleQN .addItem span:first-child{
@@ -262,7 +259,7 @@ button {
 	height: 1.5px;
 }
 .middleQN .middleQNFooter img {
-	margin-right: 0.1em;
+	margin: 0 8px -2px 12px;
 	width: 1em;
 	height: 1em; 
 }
@@ -272,17 +269,55 @@ button {
 	margin: 8px 0;
 	height: 60px;
 }
-.middleQNFooter .addChoose div:first-child {
+.middleQNFooter .addChoose .positionBtn {
 	position: absolute;
 	left: 50%;
 	top: 20px;
-	margin-left: -200px;	
+	margin-left: -136px;	
 }
 .addChoose .addBtn {
+	float: left;
 	margin-left: 15px;
-	width: 80px;
-	line-height: 2em;
+	padding: 8px;
+	width: 65px;
+	line-height: 1em;
+}
+.addChoose .addBtn img {
+	margin: 0 5px;
 }
 .addChoose .addBtn:first-child {
 	margin-left: 0;
+}
+
+/********************问题***********************/
+.question {
+	margin: 0 3%;
+	padding: 5px 3%;
+}
+.question:first-child,
+.question:last-child {
+	margin-top: 10px;
+}
+.question .questionTitle {
+	line-height: 2em;
+	font-size: 1.2em;
+}
+.question .questionTitle b:first-child {
+	margin-right: 1em;
+} 
+.question li {
+	position: relative;
+	line-height: 2.5em;
+	padding-left: 40px;	
+}
+.question li input[type="radio"],
+.question li input[type="checkbox"]{
+	position: absolute;
+	left: 10px;
+	top: 6px;
+	float: left;
+}
+.question li textarea {
+  	resize: none;
+  	outline: none;
 }
