@@ -220,10 +220,16 @@ button {
 	border-top: 1px solid rgba(193, 154, 154, 0.73);
 	padding: 20px 0 20px 5%;
 }
-
-.editQN .footerQN input{
+.editQN .footerQN label {
+	float: left;
+}
+#timeShow{
+	float: left;
 	margin: 0 25% 10px 3px;
-	width: 240px;
+	border: 1px solid black;
+	width: 238px;
+	height: 1.2em;
+	cursor: pointer;
 }
 .editQN .footerQN button{
 	float: right;
@@ -325,7 +331,7 @@ button {
 /*******************日历**************************/
 #calender {
 	position: relative;
-	margin-top: 6px;
+	margin-top: 25px;
 	margin-left: 74px;
 	width: 240px;
 	background-color: white;

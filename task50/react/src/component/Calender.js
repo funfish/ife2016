@@ -48,6 +48,24 @@ export default class Calender extends Component {
 			})
 		}
 	}
+
+	timeShow(year, month, day, dir) {
+		let newMonth = month + dir + 1;
+		if(newMonth <= 0) {
+			newMonth = 12
+		}
+		if(newMonth > 12) {
+			newMonth = 1;
+		}
+		console.log(year, newMonth, day,dir,  'child')
+		this.props.value(year, newMonth, day)
+	}
+
+	clickDouble(year, month, daycurrent, n, dir) {
+		this.timeShow(year, month, daycurrent, dir);
+		this.monthChange(daycurrent, n + 1, dir)
+	}
+
 	render() {
 		const monthes= ['一', '二', '三', '四', '五', '六', '七', '八', 
 						'九', '十', '十一', '十二'];
@@ -62,10 +80,9 @@ export default class Calender extends Component {
 		let showArray = [];
 		const showNextmonthDay = dayPreShow + dayNow;
 
-		if(showNextmonthDay < 35) {
+		if(showNextmonthDay <= 35) {
 			dayNexShow += 7;
 		}
-
 		for (let i = dayPre - dayPreShow + 1; i <= dayPre; i++) {
 			showArray.push(i);
 		}
@@ -82,11 +99,11 @@ export default class Calender extends Component {
 		for (let i = 0; i < 6; i++) {
 			for (let j = 0; j < 7; j++) {
 				if(dayPreShow <= n && n < showNextmonthDay) {
-					calenderMain.push(<li>{showArray[n]}</li>)
+					calenderMain.push(<li onClick={this.timeShow.bind(this, year, month, showArray[n], 0)}>{showArray[n]}</li>)
 				} else if (dayPreShow > n){
-					calenderMain.push(<li className="gray" onClick={this.monthChange.bind(this, showArray[n], n + 1, -1)}>{showArray[n]}</li>)
+					calenderMain.push(<li className="gray" onClick={this.clickDouble.bind(this, year, month, showArray[n], n, -1)}>{showArray[n]}</li>)
 				} else {
-					calenderMain.push(<li className="gray" onClick={this.monthChange.bind(this, showArray[n], n + 1, 1)}>{showArray[n]}</li>)					
+					calenderMain.push(<li className="gray" onClick={this.clickDouble.bind(this, year, month, showArray[n], n, 1)}>{showArray[n]}</li>)
 				}
 				n++;
 			}

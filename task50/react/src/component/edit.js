@@ -10,7 +10,7 @@ import Calender from './Calender'
 class Edit extends Component {
     constructor(props) {
       super(props);
-      this.state = {addChoose: false}
+      this.state = {addChoose: false, timeShow: '', calenderShow: false}
     }	
     componentWillUnmount() {
     	this.setState({
@@ -20,9 +20,21 @@ class Edit extends Component {
 	changeTitlenQN(id) {
 		this.props.actions.setTitlenQN(id, ReactDOM.findDOMNode(this.refs.titleQN).value)
 	}
+	timeShow(year, month, day) {
+		console.log(year, month, day)
+		this.setState({
+			timeShow: year + '-' + month + '-' + day
+		})
+	}
+	calenderShow(data) {
+		console.log(111111111111)
+		this.setState({
+			calenderShow: data
+		})
+	}
 	render() {
 		let { QNs, actions } = this.props;
-		let { addChoose } = this.state;
+		let { addChoose, timeShow, calenderShow } = this.state;
 		let QN = QNs.filter(QN => QN.id === this.props.params.id)[0];	
 
 		return (
@@ -46,12 +58,12 @@ class Edit extends Component {
 						</div>
 					</div>
 				</div>
-				<div className="footerQN">
+				<div className="footerQN clearfix">
 					<label htmlFor="deadline">问卷截止日期</label>
-					<input />
+					<div id="timeShow" onClick={this.calenderShow.bind(this, true)} >{timeShow}</div>
 					<Button value="发布问卷" />
 					<Button value="保存问卷" onAcClick={() => actions.saveQN(QN.id)} />
-					<Calender />
+					{calenderShow && <Calender value={this.timeShow.bind(this)} onBlur={this.calenderShow.bind(this, false)} />}
 				</div>
 			</div>
 		)
