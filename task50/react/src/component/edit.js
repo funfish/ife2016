@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import * as Actions from '../actions'
 import Button from './Button'
 import Q from './Q'
+import Calender from './Calender'
 
 class Edit extends Component {
     constructor(props) {
@@ -23,13 +24,12 @@ class Edit extends Component {
 		let { QNs, actions } = this.props;
 		let { addChoose } = this.state;
 		let QN = QNs.filter(QN => QN.id === this.props.params.id)[0];	
-		console.log(QN)
 
 		return (
 			<div className="editQN">
 				<b><input type="text"  ref="titleQN" className="titleQN editInput" defaultValue={`${QN.titlen}`} onBlur={this.changeTitlenQN.bind(this, QN.id)} /></b>
 				<div className="middleQN">
-					{QN.contentQs.map((item ,i) => <Q key={i} q={item} sequence={i+1} id={QN.id} actions={actions} />)}
+					{QN.contentQsn.map((item ,i) => <Q key={i} q={item} sequence={i+1} id={QN.id} actions={actions} />)}
 					<div className="middleQNFooter">
 						{addChoose && <div className="addChoose">
 							<div className="positionBtn">
@@ -50,7 +50,8 @@ class Edit extends Component {
 					<label htmlFor="deadline">问卷截止日期</label>
 					<input />
 					<Button value="发布问卷" />
-					<Button value="保存问卷" />
+					<Button value="保存问卷" onAcClick={() => actions.saveQN(QN.id)} />
+					<Calender />
 				</div>
 			</div>
 		)

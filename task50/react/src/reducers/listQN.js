@@ -1,4 +1,4 @@
-import { Add_New_QN, DELETE_QN, SELEDCT_QN, SELEDCT_QN_ALL, 
+import { Add_New_QN, DELETE_QN, SELEDCT_QN, SELEDCT_QN_ALL, SAVE_QN,
 	DELETE_QN_SOME, TITLEN_QN, ADD_NEW_Q, DELETE_Q, TITLEN_Q, TEXTN_Q } from '../constants/ActionTypes'
 import  Qlist from './QN'
 
@@ -12,7 +12,8 @@ const initialQNState = [
 		deadlinen: '11111',
 		title: '1111',
 		titlen: '1111',
-		contentQs: []
+		contentQs: [],
+		contentQsn: []
 	}
 ]
 
@@ -37,20 +38,27 @@ export default function listQN(state = initialQNState, action) {
 			return state.filter(QN => QN.selected === true)
 		
 		case TITLEN_QN:
-			return state.map((QN) => { console.log(QN.id, action.id)
-				return QN.id === action.id ? 
+			return state.map(QN => QN.id === action.id ? 
 						Object.assign({}, QN, { titlen: action.titlen }) : 
 						QN 
+					)
+		case SAVE_QN: 
+			return state.map(QN => { console.log(QN.id, action.id)
+				return QN.id === action.id ? 
+						Object.assign({}, QN, { 
+							title: QN.titlen, 
+							deadline: QN.deadlinen,
+							contentQs: QN.contentQsn
+						}) : QN 
 					})
-
 		case ADD_NEW_Q:
 		case DELETE_Q:
 		case TITLEN_Q:
 		case TEXTN_Q:
 			return state.map((QN) => QN.id === action.id ? 
-					Object.assign({}, QN, { contentQs: Qlist(QN.contentQs, action) }) : 
-					QN
-				)
+						Object.assign({}, QN, { contentQsn: Qlist(QN.contentQsn, action) }) : 
+						QN
+					)
 
 	    default:
       		return state

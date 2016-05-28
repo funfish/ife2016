@@ -223,7 +223,7 @@ button {
 
 .editQN .footerQN input{
 	margin: 0 25% 10px 3px;
-	width: 150px;
+	width: 240px;
 }
 .editQN .footerQN button{
 	float: right;
@@ -320,4 +320,82 @@ button {
 .question li textarea {
   	resize: none;
   	outline: none;
+}
+
+/*******************日历**************************/
+#calender {
+	position: relative;
+	margin-top: 6px;
+	margin-left: 74px;
+	width: 240px;
+	background-color: white;
+}
+
+#calender img:first-child {
+	position: absolute;
+	left: 50%;
+	top: -4px;
+}
+
+#calHeader,
+ul li ul:first-child {
+	background-color: #ee7419;
+	color: white;
+}
+
+#calHeader {
+	border-radius: 3px 3px 0 0;
+	line-height: 3em;
+	text-align: center;
+}
+
+#leftImg, #rightImg {
+	position: absolute;
+	top: 12px;
+	cursor: pointer;
+}
+
+#leftImg {
+	left: 30px;
+}
+
+#rightImg {
+	left: 210px;
+}
+
+#calMain {
+	border-left: 1px solid #aaa;
+	border-right: 1px solid #aaa;
+	border-bottom: 1px solid #aaa;
+}
+#calHeader .monthSpace {
+	margin-right: 1.5em;
+}
+#calHeader ul li,
+#calMain li {
+	float: left;
+	text-align: center;
+}
+#calHeader ul {
+	margin: 0 1px;
+}
+
+#calHeader ul li {
+	margin-bottom: 4px; 
+	line-height: 1.5em;
+	width: 34px;
+}
+
+#calMain li {
+	line-height: 2.5em;
+	width: 34px;
+	cursor: pointer;
+}
+
+#calMain li:hover {
+	background-color: #bbb;
+}
+
+#calMain .gray {
+	color: #A09E9E;
 }

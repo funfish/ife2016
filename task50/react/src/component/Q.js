@@ -25,8 +25,9 @@ export default class Q extends Component {
 							{q.like === 1 && <input type="radio" name="sigle"  />}
 							{q.like === 2 && <input type="checkbox" />}
 							{q.like !== 3 && <input type="text" ref={'textn_Q-' + sequence + '-' + i} className="editInput" defaultValue={`${item}`} 
-							 onBlur={this.changeTextnQ.bind(this, i)}/>}
-							{q.like === 3 && <textarea rows="4" cols="60" defaultValue={`${item}`}></textarea>}
+							 	onBlur={this.changeTextnQ.bind(this, i)}/>}
+							{q.like === 3 && <textarea rows="4" cols="60" ref={'textn_Q-' + sequence + '-' + i}
+							 	onBlur={this.changeTextnQ.bind(this, i)} defaultValue={`${item}`}></textarea>}
 						</li>
 					)}
 				</ul>

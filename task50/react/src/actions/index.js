@@ -48,3 +48,7 @@ export function setTitlenQ(id, idQ, titlen) {
 export function setTextnQ(id, idQ, n,  textn) {
 	return { type: types.TEXTN_Q, id,  idQ, n, textn }
 }
+
+export function saveQN(id) {
+	return { type: types.SAVE_QN, id }
+}
