@@ -1,0 +1,25 @@
+@import './variables.scss'
+
+//box->width and height
+@mixin box($width: auto, $height: auto) {
+	width: $width;
+	height: $height;
+}
+
+//button
+@mixin button($width: 6em, $height: 1.5em, $marginLeft: auto) {
+	@+box($width, $height);
+	margin-left: $marginLeft;
+	cursor: pointer;
+	border: 1px solid; 
+	border-radius: .2em;
+	box-shadow: 0.15em 0.15em 0.2em $gray; 
+	background-color: white;
+	text-align: center;
+	$:hover {
+		color: $white;
+		background-color: $orange;
+		border-color: $orange;
+	}
+}
+
