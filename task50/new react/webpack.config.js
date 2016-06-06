@@ -2,34 +2,24 @@
 
 var webpack = require('webpack');
 
-
-var plugins = [
-	new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor',
-        filename: 'common.js'
-    }),
-];
-
-var entry = {
-    index:  './index',
-    vendor: [
-        'react',
-        'react-dom',
-        'react-router',
-        'react-redux',
-        'redux',
-        'react-router-redux'
-    ]
-}
-
 var publicPath = '/build/';
 module.exports = {
     debug: true,
     //入口文件配置
-    entry: entry,
+    entry: {
+        index: ['./index'],
+        vendor: [
+            'react',
+            'react-dom',
+            'react-router',
+            'react-redux',
+            'redux',
+            'react-router-redux'
+        ]
+    },
     //文件导出的配置
     //web-dev-server里面的前后端联调，使用url绝对地址
-    output:{
+    output: {
         path:  __dirname + publicPath,
         filename:'app.js',
         publicPath: publicPath,
@@ -38,14 +28,14 @@ module.exports = {
     module: {
     	loaders: [{
             test: /\.css?$/,
-            loaders: [ 'style'],
+            loader: 'style!css!sass?sourceMap',
             include: __dirname
       },{
             test: /\.scss?$/,
             loaders: [ 
             'style',
-            'css?modules&localIdentName=[name]__[local]-[hash:base64:5]',
-            'css-loader?sourceMap!sass-loader'
+            'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+            'sass?sourceMap'
             ],
             include: __dirname
       },{
@@ -61,5 +51,11 @@ module.exports = {
     resolve:{
         extentions:['','js']//当requrie的模块找不到时，添加这些后缀
     },
-    plugins: plugins,
+    plugins: [  
+        new webpack.optimize.CommonsChunkPlugin({
+            name:"vendor",
+            filename:"common.js",
+            minChunks: Infinity,
+        })
+    ],
 }

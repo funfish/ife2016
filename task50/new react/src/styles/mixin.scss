@@ -1,4 +1,16 @@
-@import './variables.scss'
+@import './variables.scss';
+
+//clear both
+@mixin clearfix() {
+	*zoom:1;
+	$:after {
+		content:".";
+		display: block;
+		height: 0;
+		visibility: hidden;
+		clear: both;		
+	}
+}
 
 //box->width and height
 @mixin box($width: auto, $height: auto) {

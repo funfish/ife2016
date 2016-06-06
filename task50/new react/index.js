@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, browserHistory } from "react-router";
 import { syncHistoryWithStore } from "react-router-redux";
 import configureStore from './src/store/configureStore';
+import Home from './src/containers/Home/Home'
 
 const store = configureStore();
 const history = syncHistoryWithStore(browserHistory, store);
@@ -11,9 +12,7 @@ const history = syncHistoryWithStore(browserHistory, store);
 render(
 	<Provider store={store}>
 		<Router history={history}>
-			<Route path="/" component={}>
-				<IndexRoute component={} />
-				<Route path="edit/:id" component={Edit}/>	
+			<Route path="/" component={Home}>
 			</Route>
 		</Router>
 	</Provider>,

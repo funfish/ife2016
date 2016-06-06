@@ -1,4 +1,4 @@
-import * as Types from '../constants/QusetionnarieActionTypes'
+import * as Types from '../constants/QuestionnarieActionTypes'
 
 const initialQNEdite = {
 	id: Math.random().toString().split('.')[1],
@@ -12,16 +12,20 @@ const initialQNEdite = {
 
 let initialQNState = {
 	list: [],
-	edite: cloneObject(initialQNEdite)
+	edite: Object.assign({}, initialQNEdite)
 }
 
-function qusetionnarie (state = initialQNState, action) {
+function Questionnarie (state = initialQNState, action) {
 	switch(action.type) {
 		case Types.Add_New_QN: 
-			const { edite } = state;
- 			return edite: {cloneObject(initialQNEdite), id: Math.random().toString().split('.')[1]}
+ 			return Object.assign({}, state, {edite: 
+ 				Object.assign({}, initialQNEdite, {id: Math.random().toString().split('.')[1]})
+ 			})
 
 		case Types.DELETE_QN: return state.list.filter(QN => QN.id !== action.id)
 
+		default: return state
 	}
 }
+
+export default Questionnarie;
