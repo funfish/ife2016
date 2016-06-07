@@ -45,7 +45,8 @@
 }
 
 @mixin container-center {
-	width: 100%;
+	margin: 0 3%;
+	width: 94%;
 	min-height: 200px;
 	background-color: $white;
 	@media screen and (min-width:625px) {

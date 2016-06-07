@@ -1,0 +1,14 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixin.scss';
+
+.container-center{
+	@include container-center;
+	position: relative;	
+}
+
+.titleQN {
+    border-bottom: 1px solid rgba(193, 154, 154, 0.73);
+    padding: 30px 0;
+	width: 100%;
+    text-align: center;	
+}

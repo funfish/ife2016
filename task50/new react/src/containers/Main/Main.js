@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
+import { Link } from 'react-router';
 import {connect} from 'react-redux';
 import * as QActions from '../../actions/Questionnarie';
 import styles from './main.scss';
@@ -16,7 +17,9 @@ class Main extends Component {
 				<div></div>
 			) : (
 				<div className={styles["container-center"]}>
-					<button className={styles["button-large"]}><b>新建文卷</b></button>
+					<Link to="/edit">
+						<button className={styles["button-large"]}><b>新建文卷</b></button>
+					</Link>
 				</div>
 			)
 	}
@@ -24,7 +27,7 @@ class Main extends Component {
 
 const mapStateToProps = state => ({
 	list: state.Questionnarie.list,
-	edite: state.Questionnarie.edite
+	edit: state.Questionnarie.edit
 })
 
 const mapDispatchToProps = dispatch => ({

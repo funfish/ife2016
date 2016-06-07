@@ -24,8 +24,8 @@ export function setDeadLineQN(time) {
 	return { type: types.DEAD_LINE_QN, time }
 }
 
-export function setTitleQN(id, title) {
-	return { type: types.TITLE_QN, id, title }
+export function setTitleQN(title) {
+	return { type: types.TITLE_QN, title }
 }
 
 export function substateQN(text) {

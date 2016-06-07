@@ -47,3 +47,9 @@ button {
 ul, li {
     list-style: none;
 }
+input, button {
+    border: 0;
+}
+input {
+    outline: none;
+}
