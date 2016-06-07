@@ -2,17 +2,17 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, browserHistory } from "react-router";
-import { syncHistoryWithStore } from "react-router-redux";
 import configureStore from './src/store/configureStore';
-import Home from './src/containers/Home/Home'
+import Home from './src/containers/Home/Home';
+import Main from './src/containers/Main/Main';
 
 const store = configureStore();
-const history = syncHistoryWithStore(browserHistory, store);
 
 render(
 	<Provider store={store}>
-		<Router history={history}>
+		<Router history={browserHistory}>
 			<Route path="/" component={Home}>
+				<IndexRoute component={Main} />
 			</Route>
 		</Router>
 	</Provider>,

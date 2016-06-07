@@ -1,0 +1,21 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixin.scss';
+
+.container-center{
+	@include container-center;
+	position: relative;	
+}
+
+.button-large {
+	@include button(8em,2em);
+	@include center;
+	color: $white;
+	background-color: $orange;
+	border-color: $orange;	
+	font-size: 2em;
+	font-weight: bold;
+	&:before {
+		content: '+';
+	    margin: 0 0.5em 0 0;
+	}
+}

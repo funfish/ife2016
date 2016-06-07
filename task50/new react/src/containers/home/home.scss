@@ -1,6 +1,6 @@
 @import '../../styles/variables.scss';
 
-.container-main {
+.container {
 	margin: 0 auto;
 	@media screen and (min-width:960px) {
 		width: 960px;
@@ -29,9 +29,10 @@
 	}
 }
 
-.container-list-QNs {
+.container-main {
 	float: left;
 	width: 100%;
     background-color: #efefef;
     font-size: 12px;
+    min-height: 200px;
 }

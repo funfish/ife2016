@@ -5,8 +5,8 @@ const initialQNEdite = {
 	complete: false,
 	selected: false,
 	substate: 'false',
-	deadline: '11111',
-	title: '1111',
+	deadline: '',
+	title: '这里是标题',
 	contentQs: [],
 }
 
