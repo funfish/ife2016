@@ -45,16 +45,16 @@
 }
 
 @mixin container-center {
-	margin: 0 3%;
-	width: 94%;
-	min-height: 200px;
-	background-color: $white;
 	@media screen and (min-width:625px) {
-		margin: 60px auto;
+		margin: 60px auto 30px;
 		width: 80%;
 	}
 	@media screen and (max-width:624px) {
-		margin: 60px auto;
-		width: 80%;
+		margin: 60px auto 30px;
+		width: 500px;
 	}
+	padding: 0 2.5%;
+	width: 94%;
+	min-height: 200px;
+	background-color: $white;
 }

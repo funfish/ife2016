@@ -19,17 +19,23 @@ let initialQNState = {
 }
 
 function Questionnarie (state = initialQNState, action) {
+	let {edit} = state;
 	switch(action.type) {
 		case Types.Add_New_QN: 
- 			return Object.assign({}, state, {edit: 
- 				Object.assign({}, initialQNEdite, {id: Math.random().toString().split('.')[1]})
- 			})
+			let init = Object.assign({}, initialQNEdite);
+			init.content.id = Math.random().toString().split('.')[1];
+ 			console.log(init);
+ 			return Object.assign({}, state, {edit: init});
 
-		case Types.DELETE_QN: return state.list.filter(QN => QN.id !== action.id)
+		case Types.DELETE_QN: return state.list.filter(QN => QN.id !== action.id);
 
-		case Types.TITLE_QN: 
-			return Object.assign({}, state, {edit:{content:{title: action.title}}})
+		case Types.TITLE_QN: 			
+			edit.content.title = action.title;
+			return Object.assign({}, state, {edit: edit})
 
+		case Types.ADD_Q: 
+			edit.addChoose = true; 
+			return Object.assign({}, state, {edit: edit})
 		default: return state
 	}
 }

@@ -11,12 +11,11 @@ class Main extends Component {
 	}
 
 	render() {
-		console.log(this.props)
-		let {list, edite} = this.props;
+		let {list, edite, Qactions} = this.props;
 		return list.length ? (
 				<div></div>
 			) : (
-				<div className={styles["container-center"]}>
+				<div className={styles["container-center"]} onClick={() => QActions.addNewQN()}>
 					<Link to="/edit">
 						<button className={styles["button-large"]}><b>新建文卷</b></button>
 					</Link>

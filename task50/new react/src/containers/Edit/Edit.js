@@ -11,22 +11,39 @@ class Edit extends Component {
       this.changeTitleQN = this.changeTitleQN.bind(this);
     }
 	changeTitleQN() {
-		this.props.Qactions.setTitleQN(ReactDOM.findDOMNode(this.refs.titleQN).value)
+		this.props.Qactions.setTitleQN(ReactDOM.findDOMNode(this.refs["title-input"]).value)
 	}
 
 	render() {
 
-		let {edit, addChoose, Qactions} = this.props;
-
+		let {list, edit, addChoose, Qactions} = this.props;
 	    return (
 			<div className={styles["container-center"]}>
-					<b><input type="text" ref="titleQN" className={styles["titleQN"]} defaultValue={`${edit.title}`} onBlur={this.changeTitleQN} /></b>
+				<div className={styles["title-QN"]}>
+					<input type="text" ref="title-input" className={styles["title-input"]} defaultValue={`${edit.title}`} onBlur={this.changeTitleQN} />
+				</div>
+				<div className={styles["add-footer"]}>
+					{addChoose && <div className={styles["button-box"]}>
+						<div className={styles["add-center"]}>
+							<button className={styles["button-add"]} ><img src='../../src/img/QN单选.png' />单选</button>
+							<button className={styles["button-add"]} ><img src='../../src/img/QN多选.png' />多选</button>
+							<button className={styles["button-add"]} ><img src='../../src/img/QN文本.png' />文本题</button>
+						</div>
+					</div>	
+					}
+					<div className={styles["add-item"]} onClick={() =>Qactions.addChoose()}>
+						<div className={styles["add-center"]}>
+							<img src='../../src/img/QN加号.png' /> 添加问题
+						</div>
+					</div>
+				</div>
 			</div>	
 	    )
 	}
 }
 
 const mapStateToProps = state => ({
+	list: state.Questionnarie.list,
 	edit: state.Questionnarie.edit.content,
 	addChoose: state.Questionnarie.edit.addChoose
 })
