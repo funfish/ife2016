@@ -39,3 +39,11 @@ export function addChoose() {
 export function addNewQ(n) {
 	return {type: types.ADD_NEW_Q, n}
 }
+
+export function setTitleQ(idQ, value) {
+	return {type: types.SET_Q_TITLE, idQ, value}
+}
+
+export function setTextQ(idQ, item, value) {
+	return {type: types.SET_Q_TEXT, idQ, item, value}
+}

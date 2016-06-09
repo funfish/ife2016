@@ -55,9 +55,33 @@ function Questionnarie (state = initialQNState, action) {
 			editTemp.contentQs = [...editTemp.contentQs, Object.assign({}, initialQedit[action.n])]
 			return Object.assign({}, state, {edit: editTemp})
 			
+		case Types.SET_Q_TITLE:
+		case Types.SET_Q_TEXT:
+			return Object.assign({}, state, {edit: Object.assign({}, state.edit, 
+						{contentQs: Question(state.edit.contentQs, action)})
+					})
+
 		default: return state
 	}
 }
 
+function Question (state = [], action) {
+	switch(action.type) {
+		case Types.SET_Q_TITLE:
+			return state.map(question => question.idQ === action.idQ ? 
+					 	Object.assign({}, question, {title: action.value}) :
+					 	question
+					)
+
+		case Types.SET_Q_TEXT:
+			return state.map(question => question.idQ === action.idQ ? 
+						Object.assign({}, question, {contentQ: 
+							question.contentQ.map((option, i) => i === action.item ? 
+								option = action.value : option
+							)
+						}) : question
+					)
+	}
+}
 
 export default Questionnarie;

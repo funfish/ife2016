@@ -9,3 +9,6 @@ export const SUBSTATE_QN = 'SUBSTATE_QN';
 
 export const ADD_Q = 'ADD_Q';
 export const ADD_NEW_Q = 'ADD_NEW_Q';
+
+export const SET_Q_TITLE = 'SET_Q_TITLE';
+export const SET_Q_TEXT = 'SET_Q_TEXT';
