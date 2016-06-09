@@ -35,3 +35,7 @@ export function substateQN(text) {
 export function addChoose() {
 	return {type: types.ADD_Q}
 }
+
+export function addNewQ(n) {
+	return {type: types.ADD_NEW_Q, n}
+}

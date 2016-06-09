@@ -42,10 +42,16 @@
 	&:first-child {
 		margin-left: 0; 
 	}
+	&:hover {
+		color: inherit;
+		background-color: white;
+		border-color: inherit;		
+	}
 }
 
 .button-box {
 	@include box(100%, 6em);
+	position: relative;
 }
 .add-item {
 	position: relative;

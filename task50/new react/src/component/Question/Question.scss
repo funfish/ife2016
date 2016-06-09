@@ -1,0 +1,22 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixin.scss';
+
+.question {
+	margin: 0 2.5%;
+	padding: 0.5em 2.5%;
+	li {
+		position: relative;
+		line-height: 2em;
+		padding-left: 40px;	
+		input[type="radio"], input[type="checkbox"]{
+			position: absolute;
+			left: 10px;
+			top: 2px;
+			float: left;
+		}
+		textarea {
+		  	resize: none;
+		  	outline: none;
+		}
+	}
+}

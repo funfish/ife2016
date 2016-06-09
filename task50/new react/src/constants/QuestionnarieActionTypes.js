@@ -8,3 +8,4 @@ export const TITLE_QN = 'TITLE_QN';
 export const SUBSTATE_QN = 'SUBSTATE_QN';
 
 export const ADD_Q = 'ADD_Q';
+export const ADD_NEW_Q = 'ADD_NEW_Q';
