@@ -1,0 +1,38 @@
+@import '../../styles/variables.scss';
+
+.container {
+	margin: 0 auto;
+	@media screen and (min-width:960px) {
+		width: 960px;
+	}
+	@media screen and (max-width:959px) {
+		width: 100%;
+		min-width: 500px;
+	}
+}
+
+.header {
+	background-color: $orange;
+	line-height: 2em;
+	color: white;
+	span:first-child {
+		margin: 0.3em 5%;
+		line-height: 1.4em;
+		font-size: 1.2em;
+		font-weight: bold;
+	}
+	span:last-child {
+		margin-bottom: 0.3em; 
+		line-height: 2.7em;
+		text-align: bottom;
+		font-size: 1em;
+	}
+}
+
+.container-main {
+	float: left;
+	width: 100%;
+    background-color: #efefef;
+    font-size: 12px;
+    min-height: 200px;
+}

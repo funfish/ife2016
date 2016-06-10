@@ -1,0 +1,60 @@
+@import './variables.scss';
+
+//clear both
+@mixin clearfix() {
+	*zoom: 1;
+	&:after {
+		content:".";
+		display: block;
+		height: 0;
+		visibility: hidden;
+		clear: both;		
+	}
+}
+
+//box->width and height
+@mixin box($width: auto, $height: auto) {
+	width: $width;
+	height: $height;
+}
+
+//button
+@mixin button($width: 6em, $height: 1.5em, $marginLeft: auto) {
+	@include box($width, $height);
+	margin-left: $marginLeft;
+	cursor: pointer;
+	border: 1px solid; 
+	border-radius: .2em;
+	box-shadow: 0.15em 0.15em 0.2em $gray; 
+	line-height: $height;
+	background-color: white;
+	text-align: center;
+	&:hover {
+		color: $white;
+		background-color: $orange;
+		border-color: $orange;
+	}
+}
+
+@mixin center {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	-ms-ransform: translate(-50%, -50%);
+}
+
+@mixin container-center {
+	@media screen and (min-width:625px) {
+		margin: 60px auto 30px;
+		width: 80%;
+	}
+	@media screen and (max-width:624px) {
+		margin: 60px auto 30px;
+		width: 500px;
+	}
+	padding: 0 2.5% 2em;
+	width: 94%;
+	min-height: 200px;
+	background-color: $white;
+}
