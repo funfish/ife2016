@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as QActions from '../../actions/Questionnarie';

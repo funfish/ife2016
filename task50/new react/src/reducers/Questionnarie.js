@@ -1,4 +1,4 @@
-import * as Types from '../constants/QuestionnarieActionTypes'
+import * as Types from '../constants/QuestionnarieActionTypes';
 
 const initialQNEdite = {
 	id: Math.random().toString().split('.')[1],

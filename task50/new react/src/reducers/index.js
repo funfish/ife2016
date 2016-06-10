@@ -1,8 +1,10 @@
 import {combineReducers} from 'redux';
 import Questionnarie from './Questionnarie';
+import Calender from './Calender';
 
 const rootReducer = combineReducers({
-	Questionnarie
+	Questionnarie,
+	Calender
 })
 
 export default rootReducer

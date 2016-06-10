@@ -20,10 +20,6 @@ export function deleteQNSome() {
 	return {type: types.DELETE_QN_SOME} 
 }
 
-export function setDeadLineQN(time) {
-	return {type: types.DEAD_LINE_QN, time}
-}
-
 export function setTitleQN(title) {
 	return {type: types.TITLE_QN, title}
 }
