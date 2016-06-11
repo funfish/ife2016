@@ -1,0 +1,86 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixin.scss';
+
+.time-show{
+	float: left;
+    margin: 0 25% 10px 3px;
+    border: 1px solid black;
+    padding-left: 1em;
+    width: 18.8em;
+    height: 1.2em;
+    cursor: pointer;
+}
+label {
+	float:left;
+}
+.calendar {
+	position: relative;
+	float: left;
+	margin-left: 74px;
+	width: 19.8em;
+	background-color: white;
+	img:first-child {
+		position: absolute;
+		left: 50%;
+		top: -0.3em;
+	}
+}
+
+.cal-header {
+	position: relative;
+	border-radius: 3px 3px 0 0;
+	line-height: 3em;
+	text-align: center;
+	background-color: #ee7419;
+	color: white;
+	.month-space {
+		margin-right: 1.5em;
+	}
+	.left-img, .right-img {
+		position: absolute;
+		top: 1em;
+		cursor: pointer;
+	}
+	.left-img {
+		left: 2.5em;
+	}
+
+	.right-img {
+		left: 17.5em;
+	}
+	ul {
+		@include clearfix;
+		margin: 0 1px;
+	}
+}
+
+ul li{
+	float: left;
+	text-align: center;
+	margin-bottom: 4px; 
+	line-height: 1.5em;
+	width: 2.8em;
+}
+
+ul li ul:first-child {
+	background-color: #ee7419;
+	color: white;
+}
+
+
+.cal-main {
+	@include clearfix;
+	border-left: 1px solid #aaa;
+	border-right: 1px solid #aaa;
+	border-bottom: 1px solid #aaa;
+	li {
+		line-height: 2em;
+		cursor: pointer;
+		&:hover {
+			background-color: #bbb;
+		}
+	}
+	.gray {
+		color: #A09E9E;
+	}
+}

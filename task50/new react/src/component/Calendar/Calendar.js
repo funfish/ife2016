@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import ReactDom from 'react-dom';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import * as CActions from '../../actions/Calender';
-import styles from './Calender.scss';
+import * as CActions from '../../actions/Calendar';
+import styles from './Calendar.scss';
 
-export default class Calender extends Component {
+class Calendar extends Component {
     constructor(props) {
       	super(props);
        	this.days = this.days.bind(this);
@@ -25,30 +25,26 @@ export default class Calender extends Component {
 	}
 
 	dayChange(newDay, allDay, dir) {
-		let {calenderShow, year, month, day, week, CActions} = this.props;
+		let {Calendar: {calendarShow, year, month, day, week}, CActions} = this.props;
 		const newWeek = allDay % 7;
-		const newMonth = this.state.month + dir;
+		const newMonth = month + dir;
 		if (newMonth >= 0 && newMonth < 12) {
-			CActions.setCalender(year, newMonth, newWeek, newDay)
+			CActions.setCalendar(year, newMonth, newWeek, newDay)
 		} else if(newMonth > 11) {
-			CActions.setCalender(year + 1, 0, newWeek, newDay)
+			CActions.setCalendar(year + 1, 0, newWeek, newDay)
 		} else if(newMonth < 0) {
-			CActions.setCalender(year - 1, 11, newWeek, newDay)
+			CActions.setCalendar(year - 1, 11, newWeek, newDay)
 		}
 	}
 
 	timeShow(newDay, allDay) {
-		dayChange(newDay, allDay, 0);
+		this.dayChange(newDay, allDay, 0);
 		this.props.CActions.setDeadLine()
 	}
 
-	clickDouble(year, month, daycurrent, n, dir) {
-		this.timeShow(year, month, daycurrent, dir);
-		this.dayChange(daycurrent, n + 1, dir)
-	}
 
 	render() {
-		let {calenderShow, deadLine, year, month, day, week, CActions} = this.props;
+		let {Calendar: {calendarShow, deadLine, year, month, day, week}, CActions} = this.props;
 
 		const monthes= ['一', '二', '三', '四', '五', '六', '七', '八', 
 						'九', '十', '十一', '十二'];
@@ -76,16 +72,16 @@ export default class Calender extends Component {
 		for (let i = 1; i <= dayNexShow; i++) {
 			showArray.push(i);
 		} 
-		let calenderMain = [];
+		let calendarMain = [];
 		let n = 0;
 		for (let i = 0; i < 6; i++) {
 			for (let j = 0; j < 7; j++) {
 				if(dayPreShow <= n && n < showNextmonthDay) {
-					calenderMain.push(<li onClick={this.timeShow.bind(this, showArray[n], n + 1)}>{showArray[n]}</li>)
+					calendarMain.push(<li onClick={this.timeShow.bind(this, showArray[n], n + 1)}>{showArray[n]}</li>)
 				} else if (dayPreShow > n){
-					calenderMain.push(<li className="gray" onClick={this.dayChange.bind(this, 1, monthNextFirst, 1)}>{showArray[n]}</li>)
+					calendarMain.push(<li className={styles.gray} onClick={this.dayChange.bind(this, 1, monthNextFirst, 1)}>{showArray[n]}</li>)
 				} else {
-					calenderMain.push(<li className="gray" onClick={this.dayChange.bind(this, 1, monthPreFirst, -1)}>{showArray[n]}</li>)
+					calendarMain.push(<li className={styles.gray} onClick={this.dayChange.bind(this, 1, monthPreFirst, -1)}>{showArray[n]}</li>)
 				}
 				n++;
 			}
@@ -94,54 +90,56 @@ export default class Calender extends Component {
 		const monthNextFirst = showNextmonthDay % 7 + 1;
 
 		return (
-			<label htmlFor="deadline">问卷截止日期</label>
-			<div id="timeShow" onClick={() => CActions.showCalender()} >{deadline}</div>
-			{calenderShow && 
-				<div id="calender">
-				<img src="../src/img/arrow.png" />
-				<div id="calHeader">
-					<span className="monthSpace">{monthes[month]}月</span>{year}
-					<img src="../src/img/left.png" id="leftImg" onClick={this.dayChange.bind(this, 1, monthPreFirst, -1)} />
-					<img src="../src/img/right.png" id="rightImg" onClick={this.dayChange.bind(this, 1, monthNextFirst, 1)} />
-					<ul className="clearfix">
-						<li>
-							Mon
-						</li>
-						<li>
-							Tue
-						</li>
-						<li>
-							Wed
-						</li>
-						<li>
-							Thu
-						</li>
-						<li>
-							Fri
-						</li>
-						<li>
-							Sai
-						</li>
-						<li>
-							Sun
-						</li>
-					</ul>	
-				</div>
-				<ul id="calMain" className="clearfix">
-					{calenderMain}
-				</ul>
-				</div>
-			}
+			<div>
+				<label htmlFor="deadline">问卷截止日期</label>
+				<div className={styles["time-show"]} onClick={() => CActions.showCalendar()} >{deadLine}</div>
+				{calendarShow && 
+					<div className={styles.calendar}>
+						<img src="../src/img/arrow.png" />
+						<div className={styles["cal-header"]}>
+							<span className={styles["month-space"]}>{monthes[month]}月</span>{year}
+							<img src="../src/img/left.png" className={styles["left-img"]} onClick={this.dayChange.bind(this, 1, monthPreFirst, -1)} />
+							<img src="../src/img/right.png" className={styles["right-img"]} onClick={this.dayChange.bind(this, 1, monthNextFirst, 1)} />
+							<ul>
+								<li>
+									Mon
+								</li>
+								<li>
+									Tue
+								</li>
+								<li>
+									Wed
+								</li>
+								<li>
+									Thu
+								</li>
+								<li>
+									Fri
+								</li>
+								<li>
+									Sai
+								</li>
+								<li>
+									Sun
+								</li>
+							</ul>	
+						</div>
+						<ul className={styles["cal-main"]}>
+							{calendarMain}
+						</ul>
+					</div>
+				}
+			</div>
 		)
 	}
 }
 
-const mapStateToProps = state => (Calender: state.Calender)
+const mapStateToProps2 = state => ({Calendar: state.Calendar})
 
-const mapDispatchToProps = dispatch => ({CActions: bindActionCreators(CActions, dispatch)})
+const mapDispatchToProps2 = dispatch => ({CActions: bindActionCreators(CActions, dispatch)})
 
 
 export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(Edit)
+	mapStateToProps2,
+	mapDispatchToProps2
+)(Calendar)

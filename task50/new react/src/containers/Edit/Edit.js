@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as QActions from '../../actions/Questionnarie';
 import Question from '../../component/Question/Question';
+import Calendar from '../../component/Calendar/Calendar';
 import styles from './Edit.scss';
 
 class Edit extends Component {
@@ -39,6 +40,9 @@ class Edit extends Component {
 							<img src='../../src/img/QN加号.png' /> 添加问题
 						</div>
 					</div>
+				</div>
+				<div className={styles["footer-QN"]}>
+					<Calendar />
 				</div>
 			</div>	
 	    )

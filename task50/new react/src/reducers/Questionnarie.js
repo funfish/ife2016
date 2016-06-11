@@ -81,6 +81,7 @@ function Question (state = [], action) {
 							)
 						}) : question
 					)
+		default: return state;
 	}
 }
 

@@ -60,3 +60,10 @@
 	background-color: $gray-light;
 	cursor: pointer;
 }
+
+.footer-QN {
+	margin: 0 3%;
+	border-top: 1px solid rgba(193, 154, 154, 0.73);
+	padding: 20px 0 20px 5%;
+	@include clearfix;
+}
