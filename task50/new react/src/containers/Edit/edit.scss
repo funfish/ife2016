@@ -64,6 +64,13 @@
 .footer-QN {
 	margin: 0 3%;
 	border-top: 1px solid rgba(193, 154, 154, 0.73);
-	padding: 20px 0 20px 5%;
+	padding: 20px 0 20px 4%;
 	@include clearfix;
+}
+
+.button-check {
+	@include button(6em,1.5em);
+	float: right;
+	box-shadow: none;
+	margin: 0.5em 1em 0 0;
 }

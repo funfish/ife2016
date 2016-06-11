@@ -90,7 +90,7 @@ class Calendar extends Component {
 		const monthNextFirst = showNextmonthDay % 7 + 1;
 
 		return (
-			<div>
+			<div className={styles["calendar-box"]}>
 				<label htmlFor="deadline">问卷截止日期</label>
 				<div className={styles["time-show"]} onClick={() => CActions.showCalendar()} >{deadLine}</div>
 				{calendarShow && 

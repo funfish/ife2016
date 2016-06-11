@@ -43,6 +43,8 @@ class Edit extends Component {
 				</div>
 				<div className={styles["footer-QN"]}>
 					<Calendar />
+					<button className={styles["button-check"]}>发布问卷</button>
+					<button className={styles["button-check"]}>保存问卷</button>
 				</div>
 			</div>	
 	    )
