@@ -36,10 +36,10 @@
 	}
 }
 
-@mixin center {
+@mixin center($left: 50%, $top: 50%) {
 	position: absolute;
-	left: 50%;
-	top: 50%;
+	left: $left;
+	top: $top;
 	transform: translate(-50%, -50%);
 	-ms-ransform: translate(-50%, -50%);
 }

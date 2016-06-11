@@ -4,7 +4,7 @@ const initialQNEdite = {
 	id: Math.random().toString().split('.')[1],
 	complete: false,
 	selected: false,
-	substate: 'false',
+	substate: '未发布',
 	deadline: '',
 	title: '这里是标题',
 	contentQs: []
@@ -52,9 +52,17 @@ function Questionnarie (state = initialQNState, action) {
 			return Object.assign({}, state, {edit: editTemp})
 		
 		case Types.ADD_NEW_Q: 	
-			editTemp.contentQs = [...editTemp.contentQs, Object.assign({}, initialQedit[action.n])]
+			editTemp.contentQs = [...editTemp.contentQs, Object.assign({}, initialQedit[action.n], {idQ: Math.random().toString().split('.')[1]})]
 			return Object.assign({}, state, {edit: editTemp})
 			
+		case Types.SUBSTATE_QN:
+			editTemp.substate = '发布';
+			return Object.assign({}, state, {edit: editTemp})
+
+		case Types.SAVE_QN:
+			editTemp.complete = true;
+			return Object.assign({}, state, {edit: editTemp, list: state.list.push(editTemp)})
+
 		case Types.SET_Q_TITLE:
 		case Types.SET_Q_TEXT:
 			return Object.assign({}, state, {edit: Object.assign({}, state.edit, 

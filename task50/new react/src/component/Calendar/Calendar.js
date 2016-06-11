@@ -91,7 +91,7 @@ class Calendar extends Component {
 
 		return (
 			<div className={styles["calendar-box"]}>
-				<label htmlFor="deadline">问卷截止日期</label>
+				<label htmlFor="deadline" className={styles.label}>问卷截止日期</label>
 				<div className={styles["time-show"]} onClick={() => CActions.showCalendar()} >{deadLine}</div>
 				{calendarShow && 
 					<div className={styles.calendar}>

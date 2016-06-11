@@ -5,23 +5,46 @@ import {connect} from 'react-redux';
 import * as QActions from '../../actions/Questionnarie';
 import Question from '../../component/Question/Question';
 import Calendar from '../../component/Calendar/Calendar';
+import Alert from '../../component/Alert/Alert';
+import * as AActions from '../../actions/Alert';
 import styles from './Edit.scss';
 
 class Edit extends Component {
     constructor(props) {
       super(props);
       this.changeTitleQN = this.changeTitleQN.bind(this);
+      this.subClickHandler = this.subClickHandler.bind(this);
     }
 	changeTitleQN() {
 		this.props.Qactions.setTitleQN(ReactDOM.findDOMNode(this.refs["title-input"]).value)
 	}
 
+	subClickHandler() {
+		const {list, edit, Calendar, addChoose, Qactions, AActions} = this.props;
+		let content, onAClick;
+		if (Calendar.deadline === '')	{
+			AActions.setAlertContent(['请选择发布日期']);
+			AActions.alertAction([]);
+		}else {
+			if (edit.complete) {
+				AActions.setAlertContent(['是否发布此卷？', '发布日期' + edit.deadline]);				
+				AActions.alertAction([Qactions.substateQN]);
+			} else {
+				AActions.setAlertContent(['点击确定，保存并发布？']);
+				AActions.alertAction([Qactions.saveQN, Qactions.substateQN]);
+			}
+		}
+		AActions.showAlert(true)
+	}
+
+
 	render() {
 
-		let {list, edit, addChoose, Qactions} = this.props;
+		const {list, edit, Alert: {show}, addChoose, Qactions} = this.props;
 		console.log(1111);
 	    return (
 			<div className={styles["container-center"]}>
+				{show && <Alert />}
 				<div className={styles["title-QN"]}>
 					<input type="text" ref="title-input" className={styles["title-input"]} defaultValue={`${edit.title}`} onBlur={this.changeTitleQN} />
 				</div>
@@ -43,8 +66,8 @@ class Edit extends Component {
 				</div>
 				<div className={styles["footer-QN"]}>
 					<Calendar />
-					<button className={styles["button-check"]}>发布问卷</button>
-					<button className={styles["button-check"]}>保存问卷</button>
+					<button className={styles["button-check"]} onClick={() => this.subClickHandler()}>发布问卷</button>
+					<button className={styles["button-check"]} onClick={() => Qactions.saveQN()}>保存问卷</button>
 				</div>
 			</div>	
 	    )
@@ -54,10 +77,15 @@ class Edit extends Component {
 const mapStateToProps = state => ({
 	list: state.Questionnarie.list,
 	edit: state.Questionnarie.edit,
-	addChoose: state.Questionnarie.addChoose
+	addChoose: state.Questionnarie.addChoose,
+	Alert: state.Alert,
+	Calendar: state.Calendar
 })
 
-const mapDispatchToProps = dispatch => ({Qactions: bindActionCreators(QActions, dispatch)})
+const mapDispatchToProps = dispatch => ({
+	Qactions: bindActionCreators(QActions, dispatch),
+	AActions: bindActionCreators(AActions, dispatch)
+})
 
 
 export default connect(

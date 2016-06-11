@@ -10,7 +10,7 @@
     line-height: 1.5em;
     cursor: pointer;
 }
-label {
+.label {
 	float:left;
 	line-height: 1.5em;
 }
@@ -59,21 +59,18 @@ label {
 		@include clearfix;
 		margin: 0 1px;
 	}
+	ul li{
+		float: left;
+		text-align: center;
+		margin-bottom: 4px; 
+		line-height: 1.5em;
+		width: 2.8em;
+	}
+	ul li ul:first-child {
+		background-color: #ee7419;
+		color: white;
+	}
 }
-
-ul li{
-	float: left;
-	text-align: center;
-	margin-bottom: 4px; 
-	line-height: 1.5em;
-	width: 2.8em;
-}
-
-ul li ul:first-child {
-	background-color: #ee7419;
-	color: white;
-}
-
 
 .cal-main {
 	@include clearfix;
@@ -81,6 +78,10 @@ ul li ul:first-child {
 	border-right: 1px solid #aaa;
 	border-bottom: 1px solid #aaa;
 	li {
+		float: left;
+		text-align: center;
+		margin-bottom: 4px; 
+		width: 2.8em;
 		line-height: 2em;
 		cursor: pointer;
 		&:hover {

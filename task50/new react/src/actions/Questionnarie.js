@@ -24,8 +24,12 @@ export function setTitleQN(title) {
 	return {type: types.TITLE_QN, title}
 }
 
-export function substateQN(text) {
-	return {type: types.SUBSTATE_QN, text}
+export function substateQN() {
+	return {type: types.SUBSTATE_QN}
+}
+
+export function saveQN() {
+	return {type: types.SAVE_QN}
 }
 
 export function addChoose() {
