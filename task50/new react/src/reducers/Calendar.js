@@ -3,7 +3,7 @@ import * as Types from '../constants/CalendarActionTypes';
 let date = new Date();
 const initDay = {
 	calendarShow: false,
-	deadLine: '',
+	deadline: '',
     year: date.getFullYear(),
     month: date.getMonth(),
     day: date.getDate(),
@@ -24,7 +24,7 @@ function Calendar(state = initDay, action) {
 			})
 
 		case Types.SET_DEADLINE: 
-			return Object.assign({}, state, {deadLine: state.year + '-' + (state.month + 1) + '-' + state.day})
+			return Object.assign({}, state, {deadline: state.year + '-' + (state.month + 1) + '-' + state.day})
 
 		default: return state;
 	}

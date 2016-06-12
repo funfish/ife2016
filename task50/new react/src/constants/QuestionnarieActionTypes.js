@@ -4,6 +4,7 @@ export const SELEDCT_QN = 'SELEDCT_QN';
 export const SELEDCT_QN_ALL = 'SELEDCT_QN_ALL';
 export const DELETE_QN_SOME = 'DELETE_QN_SOME';
 
+export const SET_DEADLINE_QN = 'SET_DEADLINE_QN';
 export const SUBSTATE_QN = 'SUBSTATE_QN';
 export const SAVE_QN = 'SAVE_QN';
 

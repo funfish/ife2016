@@ -44,7 +44,7 @@ class Calendar extends Component {
 
 
 	render() {
-		let {Calendar: {calendarShow, deadLine, year, month, day, week}, CActions} = this.props;
+		let {Calendar: {calendarShow, deadline, year, month, day, week}, CActions} = this.props;
 
 		const monthes= ['一', '二', '三', '四', '五', '六', '七', '八', 
 						'九', '十', '十一', '十二'];
@@ -92,7 +92,7 @@ class Calendar extends Component {
 		return (
 			<div className={styles["calendar-box"]}>
 				<label htmlFor="deadline" className={styles.label}>问卷截止日期</label>
-				<div className={styles["time-show"]} onClick={() => CActions.showCalendar()} >{deadLine}</div>
+				<div className={styles["time-show"]} onClick={() => CActions.showCalendar()} >{deadline}</div>
 				{calendarShow && 
 					<div className={styles.calendar}>
 						<img src="../src/img/arrow.png" />

@@ -11,6 +11,7 @@ export default class Alert extends Component {
       super(props);
       this.grayStyle = this.grayStyle.bind(this);
       this.remeasure = this.remeasure.bind(this);
+      this.comfirm = this.comfirm.bind(this);
     }
 
 	componentDidMount() {
@@ -39,22 +40,29 @@ export default class Alert extends Component {
 		}
 	}
 
-	render() {
-		const {Alert: {content}} = this.props;
+	comfirm() {
+		const {Alert, Calendar, AActions} = this.props;
+		if (Calendar.deadline !== '') {
+			Alert.actions.map((item) => item.call(this));			
+		}
+		AActions.showAlert(false);
+	}
+ 	render() {
+		const {Alert: {content}, AActions} = this.props;
 
 
 		return (
 			<div ref="gray-cover" className={styles["gray-cover"]} style={this.grayStyle()}>
 				<div className={styles.alert}>
 					<div className={styles["alert-heade"]}>
-				  		<strong>提示</strong><span className="closebtn">×</span> 
+				  		<strong>提示</strong><span className="closebtn" onClick={() => AActions.showAlert(false)}>×</span> 
 				  	</div>
 				  	<ul>
 				  		{content.map((item) => <li>{item}</li>)}
 				  	</ul>
 				  	<div className={styles["alert-choose"]}>
-				  		<button className={styles["alert-button"]}>确认</button>
-				  		<button className={styles["alert-button"]}>取消</button>
+				  		<button className={styles["alert-button"]} onClick={this.comfirm}>确认</button>
+				  		<button className={styles["alert-button"]} onClick={() => AActions.showAlert(false)}>取消</button>
 				  	</div>					
 				</div>
 			</div>
@@ -64,7 +72,7 @@ export default class Alert extends Component {
 
 const mapStateToProps2 = state => ({
 	Alert: state.Alert,
-	edit: state.Questionnarie.edit
+	Calendar: state.Calendar
 })
 
 const mapDispatchToProps2 = dispatch => ({AActions: bindActionCreators(AActions, dispatch)})

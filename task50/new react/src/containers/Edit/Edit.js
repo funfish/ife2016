@@ -27,11 +27,11 @@ class Edit extends Component {
 			AActions.alertAction([]);
 		}else {
 			if (edit.complete) {
-				AActions.setAlertContent(['是否发布此卷？', '发布日期' + edit.deadline]);				
-				AActions.alertAction([Qactions.substateQN]);
+				AActions.setAlertContent(['是否发布此卷？', '发布日期' + Calendar.deadline]);				
+				AActions.alertAction([Qactions.setDeadlineQN.bind(Calendar.deadline), Qactions.substateQN]);
 			} else {
-				AActions.setAlertContent(['点击确定，保存并发布？']);
-				AActions.alertAction([Qactions.saveQN, Qactions.substateQN]);
+				AActions.setAlertContent(['点击确定，就保存问卷并发布？', '发布日期' + Calendar.deadline]);
+				AActions.alertAction([Qactions.setDeadlineQN.bind(Calendar.deadline), Qactions.saveQN, Qactions.substateQN]);
 			}
 		}
 		AActions.showAlert(true)

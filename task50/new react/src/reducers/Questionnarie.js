@@ -61,7 +61,7 @@ function Questionnarie (state = initialQNState, action) {
 
 		case Types.SAVE_QN:
 			editTemp.complete = true;
-			return Object.assign({}, state, {edit: editTemp, list: state.list.push(editTemp)})
+			return Object.assign({}, state, {edit: editTemp, list: state.list.push(state.edit)})
 
 		case Types.SET_Q_TITLE:
 		case Types.SET_Q_TEXT:
