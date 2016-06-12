@@ -1,9 +1,43 @@
 @import '../../styles/variables.scss';
 @import '../../styles/mixin.scss';
 
-.container-center{
+.container-center {
 	@include container-center;
 	position: relative;	
+}
+.container-center-main {
+	@include container-center;
+	position: relative;	
+	min-height: initial;
+	li {
+		line-height: 3em;
+		button {
+			@include button(4.5em, 1.5em);
+			float: right;
+			margin-top: 0.7em; 
+			margin-left: 0.3em; 
+			box-shadow: none;
+		}
+	}
+	li:first-child {
+		background-color: $gray-light;
+		button {
+			width: 6em;
+			color: $white;
+			background-color: $orange;
+			border-color: $orange;	
+			&:before {
+				content: '+';
+			    margin: 0 0.5em 0 0;
+			}			
+		}
+	}
+	li input[type="radio"] {
+		position: absolute;
+		left: 10px;
+		top: 9px;
+		float: left;
+	}
 }
 
 .button-large {
@@ -18,4 +52,47 @@
 		content: '+';
 	    margin: 0 0.5em 0 0;
 	}
+}
+
+.clearfix {
+	@include clearfix;
+}
+
+.middle-list {
+	@include clearfix;
+	margin: 0 1%;
+	border-bottom: 1px solid $gray-light;
+	&:last-child {
+		border-bottom: none;
+	}
+}
+
+
+.title-list {
+	float: left;
+	margin-left: 5%;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.right-list {
+	float: right;
+	width: 33em;
+}
+
+.time-list {
+	float: left;
+	width: 10.5em;
+	margin: 0 auto;
+}
+.state-list {
+	float: left;
+	width: 6em;
+}
+.action-list {
+	float: left;
+	@include clearfix;
+	margin-left: 0.5em;
+	width: 16em;
 }

@@ -20,18 +20,18 @@ class Edit extends Component {
 	}
 
 	subClickHandler() {
-		const {list, edit, Calendar, addChoose, Qactions, AActions} = this.props;
+		const {list, edit, calendar, addChoose, Qactions, AActions} = this.props;
 		let content, onAClick;
-		if (Calendar.deadline === '')	{
+		if (calendar.deadline === '')	{
 			AActions.setAlertContent(['请选择发布日期']);
 			AActions.alertAction([]);
 		}else {
 			if (edit.complete) {
-				AActions.setAlertContent(['是否发布此卷？', '发布日期' + Calendar.deadline]);				
-				AActions.alertAction([Qactions.setDeadlineQN.bind(Calendar.deadline), Qactions.substateQN]);
+				AActions.setAlertContent(['是否发布此卷？', '发布日期' + calendar.deadline]);				
+				AActions.alertAction([Qactions.setDeadlineQN.bind(this, calendar.deadline), Qactions.substateQN]);
 			} else {
-				AActions.setAlertContent(['点击确定，就保存问卷并发布？', '发布日期' + Calendar.deadline]);
-				AActions.alertAction([Qactions.setDeadlineQN.bind(Calendar.deadline), Qactions.saveQN, Qactions.substateQN]);
+				AActions.setAlertContent(['点击确定，就保存问卷并发布？', '发布日期' + calendar.deadline]);
+				AActions.alertAction([Qactions.setDeadlineQN.bind(this, calendar.deadline), Qactions.saveQN, Qactions.substateQN]);
 			}
 		}
 		AActions.showAlert(true)
@@ -40,7 +40,7 @@ class Edit extends Component {
 
 	render() {
 
-		const {list, edit, Alert: {show}, addChoose, Qactions} = this.props;
+		const {list, edit, alert: {show}, addChoose, calendar, Qactions} = this.props;
 		console.log(1111);
 	    return (
 			<div className={styles["container-center"]}>
@@ -67,7 +67,7 @@ class Edit extends Component {
 				<div className={styles["footer-QN"]}>
 					<Calendar />
 					<button className={styles["button-check"]} onClick={() => this.subClickHandler()}>发布问卷</button>
-					<button className={styles["button-check"]} onClick={() => Qactions.saveQN()}>保存问卷</button>
+					<button className={styles["button-check"]} onClick={() => (Qactions.setDeadlineQN(calendar.deadline), Qactions.saveQN())}>保存问卷</button>
 				</div>
 			</div>	
 	    )
@@ -78,8 +78,8 @@ const mapStateToProps = state => ({
 	list: state.Questionnarie.list,
 	edit: state.Questionnarie.edit,
 	addChoose: state.Questionnarie.addChoose,
-	Alert: state.Alert,
-	Calendar: state.Calendar
+	alert: state.Alert,
+	calendar: state.Calendar
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -21,7 +21,7 @@ export function deleteQNSome() {
 }
 
 export function setDeadlineQN(deadline) {
-	return {type: types.TITLE_QN, deadline}
+	return {type: types.SET_DEADLINE_QN, deadline}
 }
 
 export function setTitleQN(title) {

@@ -54,6 +54,11 @@ function Questionnarie (state = initialQNState, action) {
 		case Types.ADD_NEW_Q: 	
 			editTemp.contentQs = [...editTemp.contentQs, Object.assign({}, initialQedit[action.n], {idQ: Math.random().toString().split('.')[1]})]
 			return Object.assign({}, state, {edit: editTemp})
+
+		case Types.SET_DEADLINE_QN: 
+			editTemp.deadline = action.deadline;
+			return Object.assign({}, state, {edit: editTemp})
+
 			
 		case Types.SUBSTATE_QN:
 			editTemp.substate = '发布';
@@ -61,7 +66,7 @@ function Questionnarie (state = initialQNState, action) {
 
 		case Types.SAVE_QN:
 			editTemp.complete = true;
-			return Object.assign({}, state, {edit: editTemp, list: state.list.push(state.edit)})
+			return Object.assign({}, state, {edit: editTemp, list: [...state.list, Object.assign({}, editTemp)]})
 
 		case Types.SET_Q_TITLE:
 		case Types.SET_Q_TEXT:

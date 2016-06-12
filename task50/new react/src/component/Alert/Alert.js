@@ -25,13 +25,13 @@ export default class Alert extends Component {
 
 	remeasure() {
 		const rect = ReactDOM.findDOMNode(this.refs["gray-cover"]).getBoundingClientRect(); 
-		const {Alert: {left, top, width, height}} = this.props;
+		const {alert: {left, top, width, height}} = this.props;
 		console.log(rect,window.innerWidth, window.innerHeight);
 		this.props.AActions.setAlertPosition(left - rect.left, top -rect.top, window.innerWidth, window.innerHeight);						
 	}
 
 	grayStyle() {
-		const {Alert: {left, top, width, height}} = this.props;
+		const {alert: {left, top, width, height}} = this.props;
 		return {
 			left: left, 
 			top: top,
@@ -41,14 +41,14 @@ export default class Alert extends Component {
 	}
 
 	comfirm() {
-		const {Alert, Calendar, AActions} = this.props;
-		if (Calendar.deadline !== '') {
-			Alert.actions.map((item) => item.call(this));			
+		const {alert, calendar, AActions} = this.props;
+		if (calendar.deadline !== '') {
+			alert.actions.map((item) => item.call(this));			
 		}
 		AActions.showAlert(false);
 	}
  	render() {
-		const {Alert: {content}, AActions} = this.props;
+		const {alert: {content}, AActions} = this.props;
 
 
 		return (
@@ -71,8 +71,8 @@ export default class Alert extends Component {
 }
 
 const mapStateToProps2 = state => ({
-	Alert: state.Alert,
-	Calendar: state.Calendar
+	alert: state.Alert,
+	calendar: state.Calendar
 })
 
 const mapDispatchToProps2 = dispatch => ({AActions: bindActionCreators(AActions, dispatch)})

@@ -3,6 +3,7 @@ import {bindActionCreators} from 'redux';
 import { Link } from 'react-router';
 import {connect} from 'react-redux';
 import * as QActions from '../../actions/Questionnarie';
+import 	QNList from '../../component/QNList/QNList'; 
 import styles from './main.scss';
 
 class Main extends Component {
@@ -10,10 +11,27 @@ class Main extends Component {
 		super(props)
 	}
 
+
 	render() {
 		let {list, edite, Qactions} = this.props;
+		console.log(list);
 		return list.length ? (
-				<div></div>
+				<ul ref="container-center-main" className={styles["container-center-main"]}>
+					<li className={styles.clearfix}>
+						<div ref="middle-list" className={styles["middle-list"]}>
+							<div className={styles["title-list"]}>标题</div> 
+							<div className={styles["right-list"]}>
+								<div className={styles["time-list"]}>时间</div>	
+								<div className={styles["state-list"]}>状态</div>
+								<div className={styles["action-list"]}>
+									<span>操作</span>
+									<button onClick={() => QActions.addNewQN()}>新建问卷</button>
+								</div>
+							</div>	
+						</div>
+					</li>
+					{list.map((item, i) => <QNList key={i} QActions={QActions} item={item}/>)}
+				</ul>
 			) : (
 				<div className={styles["container-center"]} onClick={() => QActions.addNewQN()}>
 					<Link to="/edit">
