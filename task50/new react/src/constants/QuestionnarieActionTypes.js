@@ -1,5 +1,6 @@
 export const Add_New_QN = 'Add_New_QN';
 export const DELETE_QN = 'DELETE_QN';
+export const EDIT_QN = 'EDIT_QN';
 export const SELEDCT_QN = 'SELEDCT_QN';
 export const SELEDCT_QN_ALL = 'SELEDCT_QN_ALL';
 export const DELETE_QN_SOME = 'DELETE_QN_SOME';

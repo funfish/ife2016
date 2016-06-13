@@ -8,6 +8,7 @@
 .container-center-main {
 	@include container-center;
 	position: relative;	
+	padding: 0 0 2em 0;
 	min-height: initial;
 	li {
 		line-height: 3em;
@@ -91,8 +92,8 @@
 	width: 6em;
 }
 .action-list {
-	float: left;
+	float: right;
 	@include clearfix;
-	margin-left: 0.5em;
-	width: 16em;
+	margin-left: 0.8em;
+	width: 15.7em;
 }

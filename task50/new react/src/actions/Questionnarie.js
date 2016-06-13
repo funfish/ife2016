@@ -8,6 +8,10 @@ export function deleteQN(id) {
 	return {type: types.DELETE_QN, id}
 }
 
+export function editQN(id) {
+	return {type: types.EDIT_QN, id}
+}
+
 export function selectQN(id) {
 	return {type: types.SELEDCT_QN, id} 
 }

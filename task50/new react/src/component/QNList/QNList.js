@@ -4,7 +4,7 @@ import styles from './QNList.scss';
 
 export default class QNList extends Component {
 	render() {
-		const {item: {title, deadline, substate}, QActions} = this.props;
+		const {item: {id, title, deadline, substate}, Qactions} = this.props;
 		return (
 			<li className={styles.clearfix}>
 				<input type="radio" value="" />
@@ -14,9 +14,11 @@ export default class QNList extends Component {
 					<div className={styles["time-list"]}>{deadline}</div>	
 						<div className={styles["state-list"]}>{substate}</div>
 						<div className={styles["action-list"]}>
-							<button onClick={() => QActions.addNewQN()}>查看数据</button>
-							<button onClick={() => QActions.addNewQN()}>删除</button>
-							<button onClick={() => QActions.addNewQN()}>编辑</button>
+							<button>查看数据</button>
+							<button onClick={() => Qactions.deleteQN(id)}>删除</button>
+							<Link to="/edit">
+								<button onClick={() => Qactions.editQN(id)}>编辑</button>
+							</Link>
 						</div>
 					</div>	
 				</div>

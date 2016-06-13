@@ -14,7 +14,6 @@ class Main extends Component {
 
 	render() {
 		let {list, edite, Qactions} = this.props;
-		console.log(list);
 		return list.length ? (
 				<ul ref="container-center-main" className={styles["container-center-main"]}>
 					<li className={styles.clearfix}>
@@ -25,12 +24,12 @@ class Main extends Component {
 								<div className={styles["state-list"]}>状态</div>
 								<div className={styles["action-list"]}>
 									<span>操作</span>
-									<button onClick={() => QActions.addNewQN()}>新建问卷</button>
+									<button onClick={() => Qactions.addNewQN()}>新建问卷</button>
 								</div>
 							</div>	
 						</div>
 					</li>
-					{list.map((item, i) => <QNList key={i} QActions={QActions} item={item}/>)}
+					{list.map((item, i) => <QNList key={i} Qactions={Qactions} item={item}/>)}
 				</ul>
 			) : (
 				<div className={styles["container-center"]} onClick={() => QActions.addNewQN()}>
