@@ -36,6 +36,7 @@ let initialQNState = {
 
 function Questionnarie (state = initialQNState, action) {
 	let editTemp = Object.assign({}, state.edit);
+	let listTemp = [...state.list];
 	switch(action.type) {
 		case Types.Add_New_QN: 
 			let init = Object.assign({}, initialQNEdite);
@@ -73,8 +74,19 @@ function Questionnarie (state = initialQNState, action) {
 			return Object.assign({}, state, {edit: editTemp})
 
 		case Types.SAVE_QN:
+			let flag = true;
 			editTemp.complete = true;
-			return Object.assign({}, state, {edit: editTemp, list: [...state.list, Object.assign({}, editTemp)]})
+			listTemp.forEach((QN, i) => {
+				if(QN.id === editTemp.id) {
+					listTemp[i] = editTemp
+					flag = false;
+				}	
+			})
+			if(flag) {
+				listTemp = [...listTemp, Object.assign({}, editTemp)]
+			}
+			
+			return Object.assign({}, state, {edit: editTemp, list: listTemp})
 
 		case Types.SET_Q_TITLE:
 		case Types.SET_Q_TEXT:

@@ -20,21 +20,21 @@ class Edit extends Component {
 	}
 
 	subClickHandler() {
-		const {list, edit, calendar, addChoose, Qactions, AActions} = this.props;
+		const {list, edit, calendar, addChoose, Qactions, Aactions} = this.props;
 		let content, onAClick;
 		if (calendar.deadline === '')	{
-			AActions.setAlertContent(['请选择发布日期']);
-			AActions.alertAction([]);
+			Aactions.setAlertContent(['请选择发布日期']);
+			Aactions.alertAction([]);
 		}else {
 			if (edit.complete) {
-				AActions.setAlertContent(['是否发布此卷？', '发布日期' + calendar.deadline]);				
-				AActions.alertAction([Qactions.setDeadlineQN.bind(this, calendar.deadline), Qactions.substateQN]);
+				Aactions.setAlertContent(['是否发布此卷？', '发布日期' + calendar.deadline]);				
+				Aactions.alertAction([Qactions.setDeadlineQN.bind(this, calendar.deadline), Qactions.saveQN, Qactions.substateQN]);
 			} else {
-				AActions.setAlertContent(['点击确定，就保存问卷并发布？', '发布日期' + calendar.deadline]);
-				AActions.alertAction([Qactions.setDeadlineQN.bind(this, calendar.deadline), Qactions.saveQN, Qactions.substateQN]);
+				Aactions.setAlertContent(['点击确定，就保存问卷并发布？', '发布日期' + calendar.deadline]);
+				Aactions.alertAction([Qactions.setDeadlineQN.bind(this, calendar.deadline), Qactions.saveQN, Qactions.substateQN]);
 			}
 		}
-		AActions.showAlert(true)
+		Aactions.showAlert(true)
 	}
 
 
@@ -84,7 +84,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
 	Qactions: bindActionCreators(QActions, dispatch),
-	AActions: bindActionCreators(AActions, dispatch)
+	Aactions: bindActionCreators(AActions, dispatch)
 })
 
 

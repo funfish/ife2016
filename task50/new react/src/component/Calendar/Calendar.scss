@@ -3,7 +3,7 @@
 
 .time-show{
 	float: left;
-    margin: 0 0 10px 3px;
+    margin: 0 0 0.7em 0.2em;
     border: 1px solid black;
     padding-left: 1em;
     @include box(18.8em, 1.5em);
@@ -23,7 +23,7 @@
 }
 .calendar {
 	position: relative;
-	margin: 2.5em 0 0 74px;
+	margin: 2.5em 0 0 6.16em;
 	width: 19.8em;
 	background-color: white;
 	img:first-child {
@@ -38,7 +38,7 @@
 	border-radius: 3px 3px 0 0;
 	line-height: 3em;
 	text-align: center;
-	background-color: #ee7419;
+	background-color: $orange;
 	color: white;
 	.month-space {
 		margin-right: 1.5em;
@@ -67,16 +67,16 @@
 		width: 2.8em;
 	}
 	ul li ul:first-child {
-		background-color: #ee7419;
+		background-color: $orange;
 		color: white;
 	}
 }
 
 .cal-main {
 	@include clearfix;
-	border-left: 1px solid #aaa;
-	border-right: 1px solid #aaa;
-	border-bottom: 1px solid #aaa;
+	border-left: 1px solid $gray-deep;
+	border-right: 1px solid $gray-deep;
+	border-bottom: 1px solid $gray-deep;
 	li {
 		float: left;
 		text-align: center;
@@ -85,10 +85,10 @@
 		line-height: 2em;
 		cursor: pointer;
 		&:hover {
-			background-color: #bbb;
+			background-color: $gray-deep;
 		}
 	}
 	.gray {
-		color: #A09E9E;
+		color: $gray;
 	}
 }
