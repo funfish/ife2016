@@ -41,7 +41,7 @@ class Edit extends Component {
 	render() {
 
 		const {list, edit, alert: {show}, addChoose, calendar, Qactions} = this.props;
-		console.log(1111);
+
 	    return (
 			<div className={styles["container-center"]}>
 				{show && <Alert />}
@@ -72,6 +72,16 @@ class Edit extends Component {
 			</div>	
 	    )
 	}
+}
+
+Edit.PropTypes = {
+	list: React.PropTypes.array.isRequired,
+	edit: PropTypes.object.isRequired,
+	alert: PropTypes.object.isRequired,
+	addChoose: PropTypes.oneOf([false, true]).isRequired,
+	calendar: PropTypes.object.isRequired,
+	Qactions: PropTypes.object.isRequired,
+	Aactions: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({

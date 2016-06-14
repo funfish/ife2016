@@ -13,9 +13,8 @@ class Main extends Component {
 		super(props)
 	}
 
-
 	render() {
-		let {list, edite, alert: {show}, Qactions, Aactions} = this.props;
+		let {list, alert: {show}, Qactions, Aactions} = this.props;
 		return list.length ? (
 				<ul ref="container-center-main" className={styles["container-center-main"]}>
 					{show && <Alert />}
@@ -44,9 +43,15 @@ class Main extends Component {
 	}
 }
 
+Main.PropTypes = {
+	list: React.PropTypes.array.isRequired,
+	alert: PropTypes.object.isRequired,
+	Qactions: PropTypes.object.isRequired,
+	Aactions: PropTypes.object.isRequired
+}
+
 const mapStateToProps = state => ({
 	list: state.Questionnarie.list,
-	edit: state.Questionnarie.edit,
 	alert: state.Alert
 })
 

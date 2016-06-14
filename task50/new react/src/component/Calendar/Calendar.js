@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes} from 'react';
 import ReactDom from 'react-dom';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
@@ -77,11 +77,11 @@ class Calendar extends Component {
 		for (let i = 0; i < 6; i++) {
 			for (let j = 0; j < 7; j++) {
 				if(dayPreShow <= n && n < showNextmonthDay) {
-					calendarMain.push(<li onClick={this.timeShow.bind(this, showArray[n], n + 1)}>{showArray[n]}</li>)
+					calendarMain.push(<li key={n} onClick={this.timeShow.bind(this, showArray[n], n + 1)}>{showArray[n]}</li>)
 				} else if (dayPreShow > n){
-					calendarMain.push(<li className={styles.gray} onClick={this.dayChange.bind(this, 1, monthNextFirst, 1)}>{showArray[n]}</li>)
+					calendarMain.push(<li key={n} className={styles.gray} onClick={this.dayChange.bind(this, 1, monthNextFirst, 1)}>{showArray[n]}</li>)
 				} else {
-					calendarMain.push(<li className={styles.gray} onClick={this.dayChange.bind(this, 1, monthPreFirst, -1)}>{showArray[n]}</li>)
+					calendarMain.push(<li key={n} className={styles.gray} onClick={this.dayChange.bind(this, 1, monthPreFirst, -1)}>{showArray[n]}</li>)
 				}
 				n++;
 			}
@@ -132,6 +132,11 @@ class Calendar extends Component {
 			</div>
 		)
 	}
+}
+
+Calendar.PropTypes = {
+	calendar: PropTypes.object.isRequired,
+	CActions: PropTypes.object.isRequired
 }
 
 const mapStateToProps2 = state => ({Calendar: state.Calendar})

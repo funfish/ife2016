@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes} from 'react';
 import { Link } from 'react-router';
 import styles from './QNList.scss';
 
@@ -35,4 +35,9 @@ export default class QNList extends Component {
 			</li>
 		)
 	}
+}
+
+QNList.PropTypes = {
+	item: PropTypes.object.isRequired,
+	Qactions: PropTypes.object.isRequired,
 }

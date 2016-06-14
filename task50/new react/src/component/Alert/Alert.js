@@ -70,6 +70,12 @@ export default class Alert extends Component {
 	}
 }
 
+Alert.PropTypes = {
+	alert: PropTypes.object.isRequired,
+	calendar: PropTypes.object.isRequired,
+	Aactions: PropTypes.object.isRequired
+}
+
 const mapStateToProps2 = state => ({
 	alert: state.Alert,
 	calendar: state.Calendar
