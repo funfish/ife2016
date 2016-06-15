@@ -30,7 +30,7 @@ const initialQedit = [{
 
 let initialQNState = {
 	addChoose: false,
-	list: [Object.assign({}, initialQNEdite)],
+	list: [],
 	edit: Object.assign({}, initialQNEdite)
 }
 
