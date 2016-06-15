@@ -22,7 +22,9 @@
     }
 }
 .add-footer {
-	border: 1px solid $gray;	
+	margin: auto;
+	border: 1px solid $gray;
+	width: 95%;	
 }
 .add-center {
 	@include center;
@@ -44,7 +46,7 @@
 	}
 	&:hover {
 		color: inherit;
-		background-color: white;
+		background-color: $white;
 		border-color: inherit;		
 	}
 }
@@ -52,6 +54,7 @@
 .button-box {
 	@include box(100%, 6em);
 	position: relative;
+	margin: auto;
 }
 .add-item {
 	position: relative;
@@ -59,4 +62,18 @@
 	font-size: 2.5em;
 	background-color: $gray-light;
 	cursor: pointer;
+}
+
+.footer-QN {
+	margin: 2em 0 0;
+	border-top: 1px solid rgba(193, 154, 154, 0.73);
+	padding: 20px 0 20px 4%;
+	@include clearfix;
+}
+
+.button-check {
+	@include button(6em,1.5em);
+	float: right;
+	box-shadow: none;
+	margin: 0.5em 1em 0 0;
 }

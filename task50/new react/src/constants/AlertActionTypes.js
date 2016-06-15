@@ -1,0 +1,5 @@
+export const ALERT_SHOW = 'ALERT_SHOW';
+export const ALERT_POSITION = 'ALERT_POSITION';
+export const ALERT_CONTENT = 'ALERT_CONTENT';
+export const ALERT_ACTION = 'ALERT_ACTION';
+

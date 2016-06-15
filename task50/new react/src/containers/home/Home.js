@@ -18,3 +18,6 @@ export default class Home extends Component {
 	}
 }
 
+Home.PropTypes = {
+    children: React.PropTypes.element.isRequired
+}

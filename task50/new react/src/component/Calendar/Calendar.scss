@@ -1,0 +1,94 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixin.scss';
+
+.time-show{
+	float: left;
+    margin: 0 0 0.7em 0.2em;
+    border: 1px solid black;
+    padding-left: 1em;
+    @include box(18.8em, 1.5em);
+    line-height: 1.5em;
+    cursor: pointer;
+}
+.label {
+	float:left;
+	line-height: 1.5em;
+}
+
+.calendar-box{
+	@include clearfix;
+	position: relative;
+	float: left;
+	margin-top: 0.5em;
+}
+.calendar {
+	position: relative;
+	margin: 2.5em 0 0 6.16em;
+	width: 19.8em;
+	background-color: white;
+	img:first-child {
+		position: absolute;
+		left: 50%;
+		top: -4px;
+	}
+}
+
+.cal-header {
+	position: relative;
+	border-radius: 3px 3px 0 0;
+	line-height: 3em;
+	text-align: center;
+	background-color: $orange;
+	color: white;
+	.month-space {
+		margin-right: 1.5em;
+	}
+	.left-img, .right-img {
+		position: absolute;
+		top: 1em;
+		cursor: pointer;
+	}
+	.left-img {
+		left: 2.5em;
+	}
+
+	.right-img {
+		left: 17.5em;
+	}
+	ul {
+		@include clearfix;
+		margin: 0 1px;
+	}
+	ul li{
+		float: left;
+		text-align: center;
+		margin-bottom: 4px; 
+		line-height: 1.5em;
+		width: 2.8em;
+	}
+	ul li ul:first-child {
+		background-color: $orange;
+		color: white;
+	}
+}
+
+.cal-main {
+	@include clearfix;
+	border-left: 1px solid $gray-deep;
+	border-right: 1px solid $gray-deep;
+	border-bottom: 1px solid $gray-deep;
+	li {
+		float: left;
+		text-align: center;
+		margin-bottom: 4px; 
+		width: 2.8em;
+		line-height: 2em;
+		cursor: pointer;
+		&:hover {
+			background-color: $gray-deep;
+		}
+	}
+	.gray {
+		color: $gray;
+	}
+}

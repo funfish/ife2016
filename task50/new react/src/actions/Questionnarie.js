@@ -8,6 +8,10 @@ export function deleteQN(id) {
 	return {type: types.DELETE_QN, id}
 }
 
+export function editQN(id) {
+	return {type: types.EDIT_QN, id}
+}
+
 export function selectQN(id) {
 	return {type: types.SELEDCT_QN, id} 
 }
@@ -20,16 +24,20 @@ export function deleteQNSome() {
 	return {type: types.DELETE_QN_SOME} 
 }
 
-export function setDeadLineQN(time) {
-	return {type: types.DEAD_LINE_QN, time}
+export function setDeadlineQN(deadline) {
+	return {type: types.SET_DEADLINE_QN, deadline}
 }
 
 export function setTitleQN(title) {
 	return {type: types.TITLE_QN, title}
 }
 
-export function substateQN(text) {
-	return {type: types.SUBSTATE_QN, text}
+export function substateQN() {
+	return {type: types.SUBSTATE_QN}
+}
+
+export function saveQN() {
+	return {type: types.SAVE_QN}
 }
 
 export function addChoose() {

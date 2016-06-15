@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes} from 'react'
 import ReactDOM from 'react-dom'
 import styles from './Question.scss';
 
@@ -39,4 +39,10 @@ export default class Question extends Component {
 			</div>
 		)
 	}
+}
+
+Question.PropTypes = {
+	question: React.PropTypes.array.isRequired,
+	sequence: React.PropTypes.number.isRequired,
+	Qactions: PropTypes.object.isRequired,
 }
